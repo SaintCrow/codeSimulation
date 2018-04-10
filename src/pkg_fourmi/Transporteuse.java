@@ -1,12 +1,14 @@
 package pkg_fourmi;
 
+import java.util.List;
+
 public class Transporteuse  extends Eclaireuse{
 	
 	private boolean nourriture;
 
-	public Transporteuse(Coordonnee position, Nom nom, Prenom prenom, int champvision, boolean combat,
-			boolean nourriture) {
-		super(position, nom, prenom, champvision, combat);
+	public Transporteuse(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force,
+			boolean combat, boolean nourriture) {
+		super(position, nom, prenom, champvision, endurance, force, combat);
 		this.nourriture = nourriture;
 	}
 
@@ -18,7 +20,8 @@ public class Transporteuse  extends Eclaireuse{
 		this.nourriture = nourriture;
 	}
 	
+	public void recupererNourriture(){
+		
+	}
 	
-	
-
 }

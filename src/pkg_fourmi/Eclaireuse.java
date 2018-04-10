@@ -1,16 +1,18 @@
 package pkg_fourmi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Eclaireuse extends Fourmi{
 	
 	private boolean retour;
 	private List<Coordonnee> chemin;
-	
-	public Eclaireuse(Coordonnee position, Nom nom, Prenom prenom, int champvision, boolean combat) {
-		super(position, nom, prenom, champvision, combat);
+
+	public Eclaireuse(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force,
+			boolean combat) {
+		super(position, nom, prenom, champvision, endurance, force, combat);
 		this.retour = false;
-		this.chemin = new List();
+		this.chemin = new ArrayList<Coordonnee>();
 	}
 
 	public boolean getRetour() {
@@ -37,8 +39,14 @@ public class Eclaireuse extends Fourmi{
 		
 	}
 	
-	public void poserPheromoneD
+	public void poserPheromoneDanger(){
+		
+	}
 	
+	public Coordonnee rechercheNourriture(){
+		
+		return ;
+	}
 	
 
 }

@@ -55,9 +55,14 @@ public class Eclaireuse extends Fourmi{
 		else if (this.getRetour() == true){
 			int x = coordFourmi.getX();
 			int y = coordFourmi.getY();
-			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere)
-			this.poserPheromoneNourriture();
-			this.deplacement(this.getChemin()[-1]);
+			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
+				this.setRetour(false);
+				deplacement aleatoire;
+			}
+			else{
+				this.poserPheromoneNourriture();
+				this.deplacement(this.getChemin()[-1]);
+			}
 		}
 		
 		else if (coordEnnemi != null){
@@ -80,17 +85,21 @@ public class Eclaireuse extends Fourmi{
 		else {
 			deplacement aleatoire;
 		}
-		
-		
-		
+	
 	}
 	
 	public void poserPheromoneNourriture(){
-		
+		Coordonnee coordFourmi = this.getPosition();
+		int x = coordFourmi.getX();
+		int y = coordFourmi.getY();
+		Simulation.getGrille()[x][y].addPheroNourriture(20);
 	}
 	
 	public void poserPheromoneDanger(){
-		
+		Coordonnee coordFourmi = this.getPosition();
+		int x = coordFourmi.getX();
+		int y = coordFourmi.getY();
+		Simulation.getGrille()[x][y].addPheroDanger(20);
 	}
 	
 	public Coordonnee rechercheNourriture(){

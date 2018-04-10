@@ -71,7 +71,9 @@ public abstract class Insecte {
 	 * @param c
 	 */
 	public void deplacement(Coordonnee c){
-		
+		Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(null);
+		this.position = c;
+		Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(this);
 	}
 
 	public abstract void action();

@@ -61,6 +61,8 @@ public class Coordonnee {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
+	public int euclidienne(Coordonnee c){
+		return (int) Math.sqrt(Math.pow((this.y-c.getY()),2)+Math.pow((this.x-c.getX()),2));
+	}
 
 }

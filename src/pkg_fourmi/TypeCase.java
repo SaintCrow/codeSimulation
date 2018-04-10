@@ -4,6 +4,6 @@ public enum TypeCase {
 	
 	Badlands,
 	Territoire,
-	Fourmilière;
+	Fourmiliere;
 
 }

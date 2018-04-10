@@ -23,6 +23,31 @@ public class Case {
 		this.nourriture = nour;
 		this.type = type;
 	}
+	
+	
+	
+	
+	public TypeCase getType() {
+		return type;
+	}
+	
+	public int getPheroNourriture() {
+		return pheroNourriture;
+	}
+
+	public int getPheroDanger() {
+		return pheroDanger;
+	}
+
+	public Insecte getInsecte() {
+		return insecte;
+	}
+
+	public int getNourriture() {
+		return nourriture;
+	}
+
+
 	/**
 	 * incremente la nourriture de la case 
 	 * de la quantite q

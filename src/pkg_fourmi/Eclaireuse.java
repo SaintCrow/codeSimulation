@@ -35,6 +35,7 @@ public class Eclaireuse extends Fourmi{
 		
 		Coordonnee coordEnnemi = this.rechercheEnnemi();
 		Coordonnee coordNourriture = this.rechercheNourriture();
+		Coordonnee coordFourmi = this.getPosition();
 		
 		
 		if (this.getCombat() == true){
@@ -52,6 +53,9 @@ public class Eclaireuse extends Fourmi{
 		}
 		
 		else if (this.getRetour() == true){
+			int x = coordFourmi.getX();
+			int y = coordFourmi.getY();
+			if (getGrille[x][y].getType() == TypeCase.Fourmiliere)
 			this.poserPheromoneNourriture();
 			this.deplacement(this.getChemin()[-1]);
 		}

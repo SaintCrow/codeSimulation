@@ -1,1 +1,8 @@
+<<<<<<< HEAD
 /bin/
+=======
+bin/
+.classpath
+.project
+.settings/
+>>>>>>> 0737113c500a0fd9de7da6b0ef9a9d80e16fd272

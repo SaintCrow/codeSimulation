@@ -1,14 +1,14 @@
 package pkg_fourmi;
 
 public abstract class Insecte {
-	
+
 	private Coordonnee position;
 	private Nom nom;
 	private Prenom prenom;
 	private int champvision;
 	private int endurance;
 	private int force;
-	
+
 	public Insecte(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force) {
 		this.position = position;
 		this.nom = nom;
@@ -49,7 +49,7 @@ public abstract class Insecte {
 	public void setChampvision(int champvision) {
 		this.champvision = champvision;
 	}
-	
+
 	public int getEndurance() {
 		return endurance;
 	}
@@ -66,7 +66,14 @@ public abstract class Insecte {
 		this.force = force;
 	}
 
+	/**
+	 * deplace l'insecte( change sa coordonnee
+	 * @param c
+	 */
+	public void deplacement(Coordonnee c){
+		
+	}
+
 	public abstract void action();
-	
 
 }

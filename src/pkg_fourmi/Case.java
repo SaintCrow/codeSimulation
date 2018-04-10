@@ -46,6 +46,10 @@ public class Case {
 	public int getNourriture() {
 		return nourriture;
 	}
+	
+	public Coordonnee getPosition() {
+		return position;
+	}
 
 
 	/**

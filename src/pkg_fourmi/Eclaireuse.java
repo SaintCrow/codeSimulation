@@ -61,7 +61,7 @@ public class Eclaireuse extends Fourmi{
 			}
 			else{
 				this.poserPheromoneNourriture();
-				this.deplacement(this.getChemin()[-1]);
+				this.deplacement(this.getChemin().get(-1));
 			}
 		}
 		
@@ -103,8 +103,31 @@ public class Eclaireuse extends Fourmi{
 	}
 	
 	public Coordonnee rechercheNourriture(){
-		
-		return ;
+		Coordonnee coordFourmi = this.getPosition();
+		int x = coordFourmi.getX();
+		int y = coordFourmi.getY();
+		ArrayList<Coordonnee> listNourriture = new ArrayList<Coordonnee>();
+		for (int i = x-getChampvision(); i <= x + this.getChampvision(); i++){
+			for (int j = y-getChampvision(); j <= y + this.getChampvision(); j++){
+				if (Simulation.getGrille()[i][j].getNourriture() > 0){
+					listNourriture.add(Simulation.getGrille()[i][j].getPosition());
+				}
+			}
+		}
+		if (listNourriture.size() == 0){
+			return null;
+		}
+		else if (listNourriture.size() == 1){
+			return listNourriture.get(0);
+		}
+		else{
+			ArrayList<Integer> listDistance = new ArrayList<Integer>();
+			for (int i = 0; i < listNourriture.size(); i++){
+				listDistance.add(coordFourmi.distance(listNourriture.get(i)));
+			}
+			
+		}
+
 	}
 	
 

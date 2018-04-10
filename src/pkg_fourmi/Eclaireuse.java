@@ -55,7 +55,7 @@ public class Eclaireuse extends Fourmi{
 		else if (this.getRetour() == true){
 			int x = coordFourmi.getX();
 			int y = coordFourmi.getY();
-			if (getGrille[x][y].getType() == TypeCase.Fourmiliere)
+			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere)
 			this.poserPheromoneNourriture();
 			this.deplacement(this.getChemin()[-1]);
 		}

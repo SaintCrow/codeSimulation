@@ -4,15 +4,15 @@ import java.util.Random;
 
 public class Simulation {
 
-	private Colonie colonie;
-	private Case[][] grille;
+	private static Colonie colonie;
+	private static Case[][] grille;
 
 	public Colonie getColonie() {
 		return colonie;
 	}
 
 	public void initialisation(int nbTravailleuse, int nbEclaireuse, int nbSoldate, int hauteur, int largeur, int nourMap, int nourColonie ){
-		this.grille = new Case[largeur][hauteur];
+		grille = new Case[largeur][hauteur];
 		Coordonnee centre = new Coordonnee(((int)largeur/2),((int)hauteur/2));
 		Random rd = new Random();
 		int nour = 0;
@@ -39,8 +39,8 @@ public class Simulation {
 		
 		
 	}
-	public Case[][] getGrille(){
-		return this.grille;
+	public static Case[][] getGrille(){
+		return grille;
 	}
 
 	public void apparitionEnnemi() {
@@ -48,7 +48,7 @@ public class Simulation {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

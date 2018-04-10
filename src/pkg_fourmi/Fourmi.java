@@ -22,7 +22,7 @@ public abstract class Fourmi extends Insecte{
 		return ;
 	}
 	
-	public Coordonne recherchePheromoneDanger(){
+	public Coordonnee recherchePheromoneDanger(){
 		
 		return ;
 		

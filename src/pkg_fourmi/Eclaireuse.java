@@ -6,7 +6,7 @@ import java.util.List;
 public class Eclaireuse extends Fourmi{
 	
 	private boolean retour;
-	private List<Coordonnee> chemin;
+	private ArrayList<Coordonnee> chemin;
 
 	public Eclaireuse(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force,
 			boolean combat) {
@@ -23,15 +23,35 @@ public class Eclaireuse extends Fourmi{
 		this.retour = retour;
 	}
 
-	public List<Coordonnee> getChemin() {
+	public ArrayList<Coordonnee> getChemin() {
 		return chemin;
 	}
 
-	public void setChemin(List<Coordonnee> chemin) {
+	public void setChemin(ArrayList<Coordonnee> chemin) {
 		this.chemin = chemin;
 	}
 	
 	public void action(){
+		
+		if (this.getCombat() == true){
+			Coordonnee coordEnnemi = this.rechercheEnnemi();
+			if (coordEnnemi != null){
+				if (this.getPosition().distance(coordEnnemi) == 1){
+					this.attaquer();
+				}
+				else{
+					chemin
+				}
+			}
+			else{
+				->deplacement random
+			}
+		}
+		
+		else if (this.getRetour() == true){
+			this.deplacement(this.getChemin()[-1]);
+			
+		}
 		
 	}
 	

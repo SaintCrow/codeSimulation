@@ -6,6 +6,8 @@ public class Case {
 	private int pheroDanger;
 	private Insecte insecte;
 	private int nourriture;
+	private TypeCase type;
+	
 	/**
 	 * constructeur de case 
 	 * ( la case au début ne contient pas de phéromones)
@@ -13,12 +15,13 @@ public class Case {
 	 * @param ins insecte sur la case (null si vide)
 	 * @param nour quantite de nourriture
 	 */
-	public Case(Coordonnee pos, Insecte ins, int nour){
+	public Case(Coordonnee pos, Insecte ins, int nour, TypeCase type){
 		this.position = pos;
 		this.pheroNourriture = 0;
 		this.pheroDanger = 0;
 		this.insecte = ins;
 		this.nourriture = nour;
+		this.type = type;
 	}
 	/**
 	 * incremente la nourriture de la case 

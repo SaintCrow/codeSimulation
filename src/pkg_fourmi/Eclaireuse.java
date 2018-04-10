@@ -33,25 +33,51 @@ public class Eclaireuse extends Fourmi{
 	
 	public void action(){
 		
+		Coordonnee coordEnnemi = this.rechercheEnnemi();
+		Coordonnee coordNourriture = this.rechercheNourriture();
+		
+		
 		if (this.getCombat() == true){
-			Coordonnee coordEnnemi = this.rechercheEnnemi();
 			if (coordEnnemi != null){
 				if (this.getPosition().distance(coordEnnemi) == 1){
 					this.attaquer();
 				}
 				else{
-					chemin
+					chemin;
 				}
 			}
 			else{
-				->deplacement random
+				->deplacement random;
 			}
 		}
 		
 		else if (this.getRetour() == true){
+			this.poserPheromoneNourriture();
 			this.deplacement(this.getChemin()[-1]);
-			
 		}
+		
+		else if (coordEnnemi != null){
+			this.setCombat(true);
+			this.poserPheromoneDanger();
+			if (this.getPosition().distance(coordEnnemi) == 1){
+				this.attaquer();
+			}
+			else{
+				chemin;
+			}
+		}
+		
+		else if (coordNourriture != null){
+			this.setRetour(true);
+			this.poserPheromoneNourriture();
+			this.deplacement(this.getChemin()[-1]);
+		}
+		
+		else {
+			deplacement aleatoire;
+		}
+		
+		
 		
 	}
 	

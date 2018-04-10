@@ -70,5 +70,10 @@ public class Case {
 	public void addPheroNourriture(int q){
 		this.pheroNourriture+= q;		
 	}
+
+	public void setInsecte(Insecte insecte) {
+		this.insecte = insecte;
+		
+	}
 	
 }

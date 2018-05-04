@@ -33,6 +33,10 @@ public enum Prenom {
 	Clara,
 	Adam,
 	Alice,
-	Clement;	
+	Clement,
+	Samir,
+	Yasin,
+	Yanzhuo,
+	Yan;	
 
 }

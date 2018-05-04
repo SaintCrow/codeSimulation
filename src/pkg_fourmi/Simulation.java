@@ -49,6 +49,15 @@ public class Simulation {
 			int y_depot = (int) (rd.nextFloat()*hauteur);
 			grille[x_depot][y_depot].addNourriture(nourMap);
 		}
+		while(nbTravailleuse>0){
+			int x = (int)(rd.nextFloat()*largeur);
+			int y = (int)(rd.nextFloat()*hauteur);
+			if(grille[x][y].getType() == TypeCase.Fourmiliere){
+				if(grille[x][y].getInsecte() == null){
+					grille[x][y].setInsecte(new Transporteuse(new Coordonnee(x,y), null, null, y, y, y, false, false));
+				}
+			}
+		}
 		
 		
 	}

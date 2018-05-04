@@ -37,11 +37,13 @@ public class Transporteuse  extends Eclaireuse{
 					this.attaquer();
 				}
 				else{
-					chemin;
+					Coordonnee position = this.allerA(coordEnnemi);
+					this.deplacement(position);;
 				}
 			}
 			else{
-				->deplacement random;
+				Coordonnee position = allerAleatoire();
+				this.deplacement(position);
 			}
 		}
 		
@@ -52,12 +54,14 @@ public class Transporteuse  extends Eclaireuse{
 			if (this.nourriture == true){
 				this.nourriture = false;
 				Simulation.getGrille()[x][y].addNourriture(10);		
-			this.poserPheromoneDanger();
+				this.poserPheromoneDanger();
+			}
 			if (this.getPosition().distance(coordEnnemi) == 1){
 				this.attaquer();
 			}
 			else{
-				chemin;
+				Coordonnee position = this.allerA(coordEnnemi);
+				this.deplacement(position);;
 			}
 		}
 		
@@ -66,35 +70,25 @@ public class Transporteuse  extends Eclaireuse{
 			int y = coordFourmi.getY();
 			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
 				this.setRetour(false);
-				deplacement aleatoire;
+				Coordonnee position = allerAleatoire();
+				this.deplacement(position);
 			}
 			else{
 				this.poserPheromoneNourriture();
 				this.deplacement(this.getChemin().get(-1));
-				this.setChemin(this.getChemin().remove(-1));
+				this.getChemin().remove(-1);
 			}
 		}
 		
 		else if (coordNourriture != null){
 			this.setRetour(true);
 			this.poserPheromoneNourriture();
-			this.deplacement(this.getChemin()[-1]);
+			this.deplacement(this.getChemin().get(-1));
 		}
 		
 		else {
-			deplacement aleatoire;
-		}
-	
-	}
-		
-		else if (coordNourriture != null){
-			this.setRetour(true);
-			this.poserPheromoneNourriture();
-			this.deplacement(this.getChemin()[-1]);
-		}
-		
-		else {
-			deplacement aleatoire;
+			Coordonnee position = allerAleatoire();
+			this.deplacement(position);
 		}
 	
 	}

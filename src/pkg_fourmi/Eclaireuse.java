@@ -1,6 +1,7 @@
 package pkg_fourmi;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class Eclaireuse extends Fourmi{
@@ -49,7 +50,8 @@ public class Eclaireuse extends Fourmi{
 				}
 			}
 			else{
-				->deplacement random;
+				Coordonnee position = allerAleatoire();
+				this.deplacement(position);
 			}
 		}
 		
@@ -70,12 +72,13 @@ public class Eclaireuse extends Fourmi{
 			int y = coordFourmi.getY();
 			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
 				this.setRetour(false);
-				deplacement aleatoire;
+				Coordonnee position = allerAleatoire();
+				this.deplacement(position);
 			}
 			else{
 				this.poserPheromoneNourriture();
 				this.deplacement(this.getChemin().get(-1));
-				this.setChemin(this.getChemin().remove(-1));
+				this.getChemin().remove(-1);
 			}
 		}
 		
@@ -86,7 +89,8 @@ public class Eclaireuse extends Fourmi{
 		}
 		
 		else {
-			deplacement aleatoire;
+			Coordonnee position = allerAleatoire();
+			this.deplacement(position);
 		}
 	
 	}

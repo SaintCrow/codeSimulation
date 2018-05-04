@@ -3,6 +3,7 @@ package pkg_fourmi;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
@@ -32,7 +33,11 @@ public class AffichageCase extends JPanel {
 		}
 		dessin.setPaint(Color.red);
 		for(int[] xy:this.postionEnnemis){
-			dessin.fill(new );
+			dessin.fill(new Ellipse2D.Double(xy[0]*10, xy[1]*10, 10, 10));
+		}
+		dessin.setPaint(Color.black);
+		for(int[] xy:this.postionFourmis){
+			dessin.fill(new Ellipse2D.Double(xy[0]*10, xy[1]*10, 10, 10));
 		}
 	}
 
@@ -50,6 +55,10 @@ public class AffichageCase extends JPanel {
 				}
 			}
 		}
+		this.postionEnnemis.clear();
+		this.postionFourmis.clear();
+		this.postionEnnemis.add(new int[] {0,20});
+		this.postionFourmis.add(new int[] {15,70});
 	}
 	public void setGrille(Case[][] cases) {
 		this.postionEnnemis.clear();

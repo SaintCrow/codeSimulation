@@ -1,5 +1,7 @@
 package pkg_fourmi;
 
+import java.util.ArrayList;
+
 public abstract class Insecte {
 
 	private Coordonnee position;
@@ -74,6 +76,30 @@ public abstract class Insecte {
 		Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(null);
 		this.position = c;
 		Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(this);
+	}
+	
+	public Coordonnee allerA(Coordonnee c){
+		int insecteX = this.position.getX();
+		int insecteY = this.position.getY();
+		ArrayList<Coordonnee> posiPossible = new ArrayList<Coordonnee>();
+		if (insecteX < c.getX()){
+			posiPossible.add(new Coordonnee(insecteX+1,insecteY));
+		}
+		if (insecteX > c.getX()){
+			posiPossible.add(new Coordonnee(insecteX-1,insecteY));
+		}
+		if (insecteY < c.getY()){
+			posiPossible.add(new Coordonnee(insecteX,insecteY+1));
+		}
+		if (insecteY > c.getY()){
+			posiPossible.add(new Coordonnee(insecteX,insecteY-1));
+		}
+		for (Coordonnee position : posiPossible){
+			if (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() != null){
+				return position;
+			}
+		}
+		return this.position;
 	}
 
 	public abstract void action();

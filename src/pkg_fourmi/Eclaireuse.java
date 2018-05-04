@@ -44,11 +44,24 @@ public class Eclaireuse extends Fourmi{
 					this.attaquer();
 				}
 				else{
-					chemin;
+					Coordonnee position = this.allerA(coordEnnemi);
+					this.deplacement(position);
 				}
 			}
 			else{
 				->deplacement random;
+			}
+		}
+		
+		else if (coordEnnemi != null){
+			this.setCombat(true);
+			this.poserPheromoneDanger();
+			if (this.getPosition().distance(coordEnnemi) == 1){
+				this.attaquer();
+			}
+			else{
+				Coordonnee position = this.allerA(coordEnnemi);
+				this.deplacement(position);
 			}
 		}
 		
@@ -62,24 +75,14 @@ public class Eclaireuse extends Fourmi{
 			else{
 				this.poserPheromoneNourriture();
 				this.deplacement(this.getChemin().get(-1));
-			}
-		}
-		
-		else if (coordEnnemi != null){
-			this.setCombat(true);
-			this.poserPheromoneDanger();
-			if (this.getPosition().distance(coordEnnemi) == 1){
-				this.attaquer();
-			}
-			else{
-				chemin;
+				this.setChemin(this.getChemin().remove(-1));
 			}
 		}
 		
 		else if (coordNourriture != null){
 			this.setRetour(true);
 			this.poserPheromoneNourriture();
-			this.deplacement(this.getChemin()[-1]);
+			this.deplacement(this.getChemin().get(-1));
 		}
 		
 		else {

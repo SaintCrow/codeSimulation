@@ -47,10 +47,29 @@ public class AffichageCase extends JPanel {
 			}
 		}
 	}
-	public void setGrille(Case[][] c) {
+	public void setGrille(Case[][] cases) {
 		int valeurMaxNouriture = 1000;
 		int valeurMaxPherNouriture =1000;
-		int valeurMaxPher
+		int valeurMaxPherDanger = 1000;
+		
+		int x = 0;
+		int y = 0;
+		
+		for(Case[] colones: cases){
+			for(Case c: colones){
+				x=c.getPosition().getX();
+				y=c.getPosition().getY();
+				
+				this.grille[x][y][0] = (int) ( 255*(c.getNourriture()/valeurMaxNouriture));
+				this.grille[x][y][1] = (int) ( 255*(c.getPheroDanger()/valeurMaxPherDanger));
+				this.grille[x][y][2] = (int) ( 255*(c.getPheroNourriture()/valeurMaxPherNouriture));
+				for(int i=0;i<3;i++){
+					if(this.grille[x][y][i]>255){
+						this.grille[x][y][i]=255;
+					}
+				}
+			}
+		}
 	}
 
 

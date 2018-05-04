@@ -1,18 +1,18 @@
 package pkg_fourmi;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class AffichageCase extends JPanel {
 	int[][][] grille = new int[100][100][3]; // grille contenant les couleurs
-
+	ArrayList<int[]> postionEnnemis = new ArrayList<int[]>();
+	ArrayList<int[]> postionFourmis = new ArrayList<int[]>();
 	public AffichageCase() {
 		setSize(1000, 1000);
 		setBackground(Color.blue);
@@ -29,6 +29,10 @@ public class AffichageCase extends JPanel {
 				dessin.fill(new Rectangle2D.Double(i * 10, j * 10, 10, 10));
 
 			}
+		}
+		dessin.setPaint(Color.red);
+		for(int[] xy:this.postionEnnemis){
+			dessin.fill(new );
 		}
 	}
 
@@ -48,6 +52,9 @@ public class AffichageCase extends JPanel {
 		}
 	}
 	public void setGrille(Case[][] cases) {
+		this.postionEnnemis.clear();
+		this.postionFourmis.clear();
+		
 		int valeurMaxNouriture = 1000;
 		int valeurMaxPherNouriture =1000;
 		int valeurMaxPherDanger = 1000;
@@ -57,6 +64,14 @@ public class AffichageCase extends JPanel {
 		
 		for(Case[] colones: cases){
 			for(Case c: colones){
+				if(c.getInsecte()!=null){
+					if(c.getInsecte() instanceof Fourmi){
+						this.postionFourmis.add(new int[] {x,y});
+					}
+					else{
+						this.postionEnnemis.add(new int[] {x,y});
+					}
+				}
 				x=c.getPosition().getX();
 				y=c.getPosition().getY();
 				

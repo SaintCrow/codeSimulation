@@ -95,11 +95,40 @@ public abstract class Insecte {
 			posiPossible.add(new Coordonnee(insecteX,insecteY-1));
 		}
 		for (Coordonnee position : posiPossible){
-			if (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() != null){
+			if (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null){
 				return position;
 			}
 		}
 		return this.position;
+	}
+	
+	public Coordonnee allerAleatoire(){
+		int insecteX = this.position.getX();
+		int insecteY = this.position.getY();
+		ArrayList<Coordonnee> posiPossible = new ArrayList<Coordonnee>();
+		posiPossible.add(new Coordonnee(insecteX+1,insecteY));
+		posiPossible.add(new Coordonnee(insecteX-1,insecteY));
+		posiPossible.add(new Coordonnee(insecteX,insecteY+1));
+		posiPossible.add(new Coordonnee(insecteX,insecteY-1));
+		if (this instanceof Soldate) {
+			for (Coordonnee position : posiPossible){
+				if (Simulation.getGrille()[position.getX()][position.getY()].getType() == TypeCase.Badlands){
+					posiPossible.remove(position);
+				}
+			}
+		}
+		for (Coordonnee position : posiPossible){
+			if (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() != null){
+				posiPossible.remove(position);
+			}
+		}
+		if (posiPossible.size() != 0){
+			int indice = (int) (Math.random()*posiPossible.size());
+			return posiPossible.get(indice);
+		}
+		else {
+			return this.position;
+		}
 	}
 
 	public abstract void action();

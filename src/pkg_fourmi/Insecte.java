@@ -1,6 +1,7 @@
 package pkg_fourmi;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Insecte {
 
@@ -11,11 +12,16 @@ public abstract class Insecte {
 	private int endurance;
 	private int force;
 
-	public Insecte(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force) {
+	public Insecte(Coordonnee position, int endurance, int force) {
+		Random rd = new Random();
+		Nom[] listNom = Nom.values();
+		Prenom[] listPrenom = Prenom.values();
+		Nom nom = listNom[rd.nextInt(listNom.length)];
+		Prenom prenom = listPrenom[rd.nextInt(listPrenom.length)];
 		this.position = position;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.champvision = champvision;
+		this.champvision = 4;
 		this.endurance = endurance;
 		this.force = force;
 	}

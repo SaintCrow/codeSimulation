@@ -9,9 +9,8 @@ public class Eclaireuse extends Fourmi{
 	private boolean retour;
 	private ArrayList<Coordonnee> chemin;
 
-	public Eclaireuse(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force,
-			boolean combat) {
-		super(position, nom, prenom, champvision, endurance, force, combat);
+	public Eclaireuse(Coordonnee position, Colonie colonie) {
+		super(position, 1, 1, colonie);
 		this.retour = false;
 		this.chemin = new ArrayList<Coordonnee>();
 	}

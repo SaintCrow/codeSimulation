@@ -5,10 +5,13 @@ import java.util.ArrayList;
 public abstract class Fourmi extends Insecte{
 	
 	private boolean combat;
+	private Colonie colonie;
 		
-	public Fourmi(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force, boolean combat) {
-		super(position, nom, prenom, champvision, endurance, force);
+	public Fourmi(Coordonnee position, int endurance, int force, Colonie colonie) {
+		super(position, endurance, force);
 		this.combat = combat;
+		this.colonie = colonie;
+		this.combat = false;
 	}
 
 	public boolean getCombat() {
@@ -17,6 +20,10 @@ public abstract class Fourmi extends Insecte{
 
 	public void setCombat(boolean combat) {
 		this.combat = combat;
+	}	
+
+	public Colonie getColonie() {
+		return colonie;
 	}
 
 	public Coordonnee rechercheEnnemi(){

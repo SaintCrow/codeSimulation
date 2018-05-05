@@ -6,10 +6,10 @@ public class Transporteuse  extends Eclaireuse{
 	
 	private boolean nourriture;
 
-	public Transporteuse(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force,
-			boolean combat, boolean nourriture) {
-		super(position, nom, prenom, champvision, endurance, force, combat);
+	public Transporteuse(Coordonnee position, Colonie colonie) {
+		super(position, colonie);
 		this.nourriture = nourriture;
+		this.nourriture = false;
 	}
 
 	public boolean getNourriture() {

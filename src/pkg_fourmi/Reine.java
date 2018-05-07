@@ -24,23 +24,36 @@ public class Reine extends Fourmi{
 			
 			int choixPonte = (int) (rd.nextFloat()*3);
 			Coordonnee position = this.allerAleatoire();
+			int stockNourriture = this.getColonie().getStockNourriture();
 			
 			if (choixPonte == 0) {
 				Fourmi fourmi = new Soldate(position, this.getColonie());
-				this.getColonie().getMembres().add(fourmi);
+				this.getColonie().ajouterFourmi(fourmi);
+				this.getColonie().setStockNourriture(stockNourriture-5);
+				System.out.println(fourmi.toString() + " est né(e).");
 			}
 			
 			if (choixPonte == 1) {
 				Fourmi fourmi = new Eclaireuse(position, this.getColonie());
-				this.getColonie().getMembres().add(fourmi);
+				this.getColonie().ajouterFourmi(fourmi);
+				this.getColonie().setStockNourriture(stockNourriture-2);
+				System.out.println(fourmi.toString() + " est né(e).");
 			}
 			
 			if (choixPonte == 2) {
 				Fourmi fourmi = new Transporteuse(position, this.getColonie());
-				this.getColonie().getMembres().add(fourmi);
+				this.getColonie().ajouterFourmi(fourmi);
+				this.getColonie().setStockNourriture(stockNourriture-2);
+				System.out.println(fourmi.toString() + " est né(e).");
 			}
 			
 		}
+	}
+	
+	@Override
+	public String toString(){
+		String s = "Reine " + this.getPrenom() + " " + this.getNom();
+		return s;
 	}
 
 }

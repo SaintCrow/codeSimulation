@@ -25,6 +25,24 @@ public class Coordonnee {
 	public int distance(Coordonnee c) {
 		return Math.abs(this.x - c.getX()) + Math.abs(this.y - c.getY());
 	}
+	
+	public boolean estCorrecte() {
+		if (this.x < 0) {
+			return false;
+		}
+		else if (this.x >= Simulation.getLargeur()) {
+			return false;
+		}
+		else if (this.y < 0) {
+			return false;
+		}
+		else if (this.y >= Simulation.getHauteur()) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
 	/**
 	 * getter x
@@ -63,6 +81,11 @@ public class Coordonnee {
 	}
 	public int euclidienne(Coordonnee c){
 		return (int) Math.sqrt(Math.pow((this.y-c.getY()),2)+Math.pow((this.x-c.getX()),2));
+	}
+	
+	@Override
+	public String toString() {
+		return "("+this.x+","+this.y+")";
 	}
 
 }

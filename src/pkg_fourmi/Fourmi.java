@@ -33,7 +33,8 @@ public abstract class Fourmi extends Insecte{
 		ArrayList<Coordonnee> listEnnemi = new ArrayList<Coordonnee>();
 		for (int i = x-getChampvision(); i <= x + this.getChampvision(); i++){
 			for (int j = y-getChampvision(); j <= y + this.getChampvision(); j++){
-				if (Simulation.getGrille()[i][j].getInsecte() instanceof Ennemi){
+				Coordonnee position = new Coordonnee(i,j);
+				if ((position.estCorrecte())&&(Simulation.getGrille()[i][j].getInsecte() instanceof Ennemi)){
 					listEnnemi.add(Simulation.getGrille()[i][j].getPosition());
 				}
 			}
@@ -47,7 +48,7 @@ public abstract class Fourmi extends Insecte{
 		else{
 			Coordonnee coordPlusProche = listEnnemi.get(0);
 			for (int i = 1; i < listEnnemi.size(); i++){
-				if (coordFourmi.distance(listEnnemi.get(i)) > coordFourmi.distance(coordPlusProche)){
+				if (coordFourmi.distance(listEnnemi.get(i)) < coordFourmi.distance(coordPlusProche)){
 					coordPlusProche = listEnnemi.get(i);
 				}
 			}
@@ -62,7 +63,7 @@ public abstract class Fourmi extends Insecte{
 		ArrayList<Coordonnee> listPheromone = new ArrayList<Coordonnee>();
 		for (int i = x-getChampvision(); i <= x + this.getChampvision(); i++){
 			for (int j = y-getChampvision(); j <= y + this.getChampvision(); j++){
-				if (Simulation.getGrille()[i][j].getPheroDanger() != 0){
+				if ((new Coordonnee(i,j).estCorrecte())&&(Simulation.getGrille()[i][j].getPheroDanger() != 0)){
 					listPheromone.add(Simulation.getGrille()[i][j].getPosition());
 				}
 			}
@@ -92,16 +93,12 @@ public abstract class Fourmi extends Insecte{
 			}
 			Coordonnee coordPlusProche = listPheromonePlusForte.get(0);
 			for (int i = 1; i < listPheromonePlusForte.size(); i++){
-				if (coordFourmi.distance(listPheromonePlusForte.get(i)) > coordFourmi.distance(coordPlusProche)){
+				if (coordFourmi.distance(listPheromonePlusForte.get(i)) < coordFourmi.distance(coordPlusProche)){
 					coordPlusProche = listPheromonePlusForte.get(i);
 				}
 			}
 			return coordPlusProche;
 		}
-		
-	}
-	
-	public void attaquer(){
 		
 	}
 

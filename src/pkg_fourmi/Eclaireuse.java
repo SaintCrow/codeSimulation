@@ -41,7 +41,7 @@ public class Eclaireuse extends Fourmi{
 		if (this.getCombat() == true){
 			if (coordEnnemi != null){
 				if (this.getPosition().distance(coordEnnemi) == 1){
-					this.attaquer();
+					this.attaquer(coordEnnemi);
 				}
 				else{
 					Coordonnee position = this.allerA(coordEnnemi);
@@ -58,7 +58,7 @@ public class Eclaireuse extends Fourmi{
 			this.setCombat(true);
 			this.poserPheromoneDanger();
 			if (this.getPosition().distance(coordEnnemi) == 1){
-				this.attaquer();
+				this.attaquer(coordEnnemi);
 			}
 			else{
 				Coordonnee position = this.allerA(coordEnnemi);
@@ -115,7 +115,8 @@ public class Eclaireuse extends Fourmi{
 		ArrayList<Coordonnee> listNourriture = new ArrayList<Coordonnee>();
 		for (int i = x-getChampvision(); i <= x + this.getChampvision(); i++){
 			for (int j = y-getChampvision(); j <= y + this.getChampvision(); j++){
-				if (Simulation.getGrille()[i][j].getNourriture() > 0){
+				Coordonnee position = new Coordonnee(i,j);
+				if ((position.estCorrecte())&&(Simulation.getGrille()[i][j].getNourriture() > 0)){
 					listNourriture.add(Simulation.getGrille()[i][j].getPosition());
 				}
 			}
@@ -137,6 +138,14 @@ public class Eclaireuse extends Fourmi{
 		}
 
 	}
+	
+	@Override
+	public String toString(){
+		String s = "Eclaireuse " + this.getPrenom() + " " + this.getNom();
+		return s;
+	}
+
+	
 	
 
 }

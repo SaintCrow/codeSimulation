@@ -86,9 +86,9 @@ public class AffichageCase extends JPanel {
 		this.postionEnnemis.clear();
 		this.postionFourmis.clear();
 		
-		int valeurMaxNouriture = 1000;
-		int valeurMaxPherNouriture =1000;
-		int valeurMaxPherDanger = 1000;
+		float valeurMaxNouriture = 100;
+		float valeurMaxPherNouriture =100;
+		float valeurMaxPherDanger = 100;
 		
 		int x = 0;
 		int y = 0;
@@ -105,10 +105,12 @@ public class AffichageCase extends JPanel {
 				}
 				x=c.getPosition().getX();
 				y=c.getPosition().getY();
-				
-				this.grille[x][y][0] = (int) (255 - 255*(c.getNourriture()/valeurMaxNouriture));
-				this.grille[x][y][1] = (int) (255 - 255*(c.getPheroDanger()/valeurMaxPherDanger));
-				this.grille[x][y][2] = (int) (255 - 255*(c.getPheroNourriture()/valeurMaxPherNouriture));
+				float nourriture = (float)(c.getNourriture());
+				float pheroD = (float)(c.getPheroDanger());
+				float pheroN = (float)(c.getPheroNourriture());
+				this.grille[x][y][1] = (int) (100 + 150*(nourriture/valeurMaxNouriture));
+				this.grille[x][y][0] = (int) (100 + 150*(pheroD/valeurMaxPherDanger));
+				this.grille[x][y][2] = (int) (100 + 150*(pheroN/valeurMaxPherNouriture));
 				for(int i=0;i<3;i++){
 					if(this.grille[x][y][i]>255){
 						this.grille[x][y][i]=255;

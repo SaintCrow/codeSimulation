@@ -84,7 +84,6 @@ public class Eclaireuse extends Fourmi{
 				this.setRetour(false);
 				Coordonnee position = allerAleatoire();
 				this.deplacement(position);
-				
 			}
 			else {
 				this.deplacement(this.getChemin().get(this.getChemin().size()-1));

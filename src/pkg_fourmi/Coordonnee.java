@@ -16,15 +16,25 @@ public class Coordonnee {
 	}
 
 	/**
+	 * Cette fonction calcule la distance (en case de la grille) entre un objet 
+	 * pris en paramètre et l'insecte qui l'appelle
 	 * 
-	 * @param c
-	 *            other coordinate
-	 * @return distance entre les l'objet et c, pas de dÃ©placement sur les
+	 * @param c 
+	 *            
+	 * @return distance entre l'insecte et c, pas de deplacement sur les
 	 *         diagonales
 	 */
 	public int distance(Coordonnee c) {
 		return Math.abs(this.x - c.getX()) + Math.abs(this.y - c.getY());
 	}
+	
+	/**
+	 * Cette fonction permet de déterminer si les coordonnées d'un objet sont correctes:
+	 * elle renvoie false si l'objet n'est pas dans la grille ou si ses coordonnées sont négatives
+	 * et true sinon
+	 * 
+	 * @return boolean
+	 */
 	
 	public boolean estCorrecte() {
 		if (this.x < 0) {
@@ -79,11 +89,25 @@ public class Coordonnee {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	
+	/**
+	 *Cette fonction nous permet de calculer la distance euclidienne entre l'insecte qui l'appelle et 
+	 *un point c
+	 *Nous avons besoin de cette distance euclidienne pour prendre le rayon du cercle de phéromones de danger
+	 *posé par les fourmis lorsqu'elles repèrent un ennemi	 
+	 *
+	 * @return distance euclidienne entre c et l'insecte
+	 */
+	
 	public int euclidienne(Coordonnee c){
 		return (int) Math.sqrt(Math.pow((this.y-c.getY()),2)+Math.pow((this.x-c.getX()),2));
 	}
 	
 	@Override
+	/**
+	* Cette fonction toString nous permet d'afficher facilement les coordonnées et d'y accéder
+	*/
 	public String toString() {
 		return "("+this.x+","+this.y+")";
 	}

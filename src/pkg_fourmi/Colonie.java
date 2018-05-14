@@ -9,15 +9,12 @@ public class Colonie {
 	private int stockNourriture;
 	private List<Fourmi> membres;
 
-	public Colonie(String nom, int stockNourriture, List<Fourmi> membres) {
-		super();
-		this.nom = nom;
-		this.stockNourriture = stockNourriture;
-		this.membres = membres;
-	}
+	
 	
 	/**
 	 * constructeur
+	 * 
+	 * on prend les membres de la colonie dans la liste des fourmis
 	 * 
 	 * @param nom
 	 * @param stockNourriture
@@ -32,9 +29,9 @@ public class Colonie {
 	}
 	
 	/**
-	 * getter x
+	 * getter Nom de la colonie
 	 * 
-	 * @return x
+	 * @return nom
 	 */
 
 	public String getNom() {
@@ -42,9 +39,9 @@ public class Colonie {
 	}
 	
 	/**
-	 * getter x
+	 * set Nom
 	 * 
-	 * @return x
+	 * @param nom
 	 */
 
 	public void setNom(String nom) {
@@ -52,19 +49,24 @@ public class Colonie {
 	}
 	
 	/**
-	 * getter x
+	 * getter du stock de nourriture de la colonie
 	 * 
-	 * @return x
+	 * @return stockNourriture
 	 */
 
 	public int getStockNourriture() {
 		return stockNourriture;
 	}
 	
+<<<<<<< HEAD
+	/**
+	 * set du stock de nourriture
+=======
 	/**5
 	 * getter x
+>>>>>>> abf6ad8946cc3e919cfe98b2c0367af59565bd92
 	 * 
-	 * @return x
+	 * @param StockNourriture
 	 */
 
 	public void setStockNourriture(int stockNourriture) {
@@ -72,9 +74,9 @@ public class Colonie {
 	}
 	
 	/**
-	 * getter x
+	 * getter des membres de la colonie
 	 * 
-	 * @return x
+	 * @return membres
 	 */
 
 	public List<Fourmi> getMembres() {
@@ -82,9 +84,8 @@ public class Colonie {
 	}
 	
 	/**
-	 * getter x
-	 * 
-	 * @return x
+	 * fonction ajoutant des fourmis à la colonie
+	 * @param fourmi
 	 */
 
 	public void ajouterFourmi(Fourmi fourmi) {
@@ -95,9 +96,8 @@ public class Colonie {
 	}
 	
 	/**
-	 * getter x
-	 * 
-	 * @return x
+	 * set membres de la colonie
+	 * @param membres
 	 */
 
 	public void setMembres(List<Fourmi> membres) {
@@ -105,9 +105,8 @@ public class Colonie {
 	}
 	
 	/**
-	 * getter x
-	 * 
-	 * @return x
+	 * fonction gérant les famines:
+	 * elle élimine aléatoirement un membre de la colonie en cas de pénurie de nourriture
 	 */
 
 	public void famine() {
@@ -116,9 +115,9 @@ public class Colonie {
 	}
 	
 	/**
-	 * getter x
-	 * 
-	 * @return x
+	 * fonction gérant la consommation de nourriture par les fourmis
+	 * chaque membre consomme une unité de nourriture
+	 * si le stock atteint zéro, la famine est déclenchée
 	 */
 
 	public void consommation() {

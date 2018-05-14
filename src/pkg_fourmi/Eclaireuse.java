@@ -2,10 +2,12 @@ package pkg_fourmi;
 
 import java.util.ArrayList;
 
+import java.util.List;
+
 public class Eclaireuse extends Fourmi{
 	
 	private boolean retour;
-	protected ArrayList<Coordonnee> chemin;
+	private ArrayList<Coordonnee> chemin;
 
 	public Eclaireuse(Coordonnee position, Colonie colonie) {
 		super(position, 1, 1, colonie);
@@ -28,20 +30,11 @@ public class Eclaireuse extends Fourmi{
 	public void setChemin(ArrayList<Coordonnee> chemin) {
 		this.chemin = chemin;
 	}
-	@Override
-	public void deplacement(Coordonnee c){
-		super.deplacement(c);
-		if(this.retour==false){
-			this.chemin.add(c);
-		}
-	}
 	
 	public void action(){
 		
 		Coordonnee coordEnnemi = this.rechercheEnnemi();
 		Coordonnee coordNourriture = this.rechercheNourriture();
-		Coordonnee coordPheroNourriture = this.recherchePheromoneNourriture();
-		Coordonnee coordPheroDanger = this.recherchePheromoneDanger();
 		Coordonnee coordFourmi = this.getPosition();
 		int x = coordFourmi.getX();
 		int y = coordFourmi.getY();
@@ -59,11 +52,6 @@ public class Eclaireuse extends Fourmi{
 			}
 		}
 		
-		else if (coordPheroDanger != null) {
-			Coordonnee position = this.allerA(coordPheroDanger);
-			this.deplacement(position);
-		}
-		
 		else if (this.getRetour() == true){
 			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
 				this.setRetour(false);
@@ -77,8 +65,7 @@ public class Eclaireuse extends Fourmi{
 			}
 		}
 		
-		else if ((coordNourriture != null)&&(coordPheroNourriture == null)){
-			this.poserPheromoneNourriture();
+		else if (coordNourriture != null){
 			this.setRetour(true);
 			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
 				this.setRetour(false);

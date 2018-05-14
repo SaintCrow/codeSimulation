@@ -24,7 +24,7 @@ public class AffichageCase extends JPanel {
 	
 	
 	/**
-	 * fonction d�finissant la taille de la grille et la couleur du fond
+	 * fonction definissant la taille de la grille et la couleur du fond
 	 */
 	public AffichageCase() {
 		setSize(1000, 1000);
@@ -62,8 +62,8 @@ public class AffichageCase extends JPanel {
 	}
 	
 	/**
-	 * fonction utilis�e pour faire des tests sur l'affichage graphique � l'aide d'une fonction random
-	 * pour tester les diff�rentes teintes de couleur 
+	 * fonction utilisee pour faire des tests sur l'affichage graphique � l'aide d'une fonction random
+	 * pour tester les differentes teintes de couleur 
 	 * @param c les cases de la grille
 	 */
 
@@ -88,8 +88,8 @@ public class AffichageCase extends JPanel {
 	}
 	
 	/**
-	 * fonction fixant une valeur maximale pour la nourriture et les ph�romones afin de cr�er une �chelle de teintes
-	 * elle r�cup�re la position des insectes et fixe les couleurs pour les cases occup�es par des ph�romones ou de la nourriture
+	 * fonction fixant une valeur maximale pour la nourriture et les pheromones afin de creer une echelle de teintes
+	 * elle recupere la position des insectes et fixe les couleurs pour les cases occupees par des pheromones ou de la nourriture
 	 * @param cases les cases de la grille
 	 */
 	public void setGrille(Case[][] cases) {

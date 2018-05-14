@@ -18,6 +18,11 @@ public class AffichageCase extends JPanel {
 	int[][][] grille = new int[100][100][3]; // grille contenant les couleurs
 	ArrayList<int[]> postionEnnemis = new ArrayList<int[]>();
 	ArrayList<int[]> postionFourmis = new ArrayList<int[]>();
+	ArrayList<int[]> postionEclaireuse = new ArrayList<int[]>();
+	ArrayList<int[]> postionTransporteuse = new ArrayList<int[]>();
+	
+	
+	
 	/**
 	 * fonction d�finissant la taille de la grille et la couleur du fond
 	 */
@@ -26,11 +31,11 @@ public class AffichageCase extends JPanel {
 		setBackground(Color.blue);
 	}
 
-	@Override // la fonction marche avec un call repaint()
 	/**
 	 * fonction affichant les ennemis en rouge et les fourmis en noir
 	 * @param g dessin pour les insectes
 	 */
+	@Override // la fonction marche avec un call repaint()
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D dessin = (Graphics2D) g;
@@ -50,7 +55,12 @@ public class AffichageCase extends JPanel {
 		for(int[] xy:this.postionFourmis){
 			dessin.fill(new Ellipse2D.Double(xy[0]*10, xy[1]*10, 10, 10));
 		}
+		dessin.setPaint(Color.blue);
+		for(int[] xy:this.postionEclaireuse){
+			dessin.fill(new Ellipse2D.Double(xy[0]*10+2, xy[1]*10+2, 8,8));
+		}
 	}
+	
 	/**
 	 * fonction utilis�e pour faire des tests sur l'affichage graphique � l'aide d'une fonction random
 	 * pour tester les diff�rentes teintes de couleur 
@@ -85,6 +95,8 @@ public class AffichageCase extends JPanel {
 	public void setGrille(Case[][] cases) {
 		this.postionEnnemis.clear();
 		this.postionFourmis.clear();
+		this.postionEclaireuse.clear();
+		this.postionTransporteuse.clear();
 		
 		float valeurMaxNouriture = 100;
 		float valeurMaxPherNouriture =100;
@@ -98,6 +110,12 @@ public class AffichageCase extends JPanel {
 				if(c.getInsecte()!=null){
 					if(c.getInsecte() instanceof Fourmi){
 						this.postionFourmis.add(new int[] {x,y});
+						if(c.getInsecte() instanceof Transporteuse){
+							this.postionTransporteuse.add(new int[] {x,y});
+						}
+						else if(c.getInsecte() instanceof Eclaireuse){
+							this.postionEclaireuse.add(new int[] {x,y});
+						}
 					}
 					else{
 						this.postionEnnemis.add(new int[] {x,y});

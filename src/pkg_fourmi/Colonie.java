@@ -61,7 +61,7 @@ public class Colonie {
 		return stockNourriture;
 	}
 	
-	/**
+	/**5
 	 * getter x
 	 * 
 	 * @return x

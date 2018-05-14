@@ -73,7 +73,7 @@ public class Eclaireuse extends Fourmi{
 			else{
 				this.poserPheromoneNourriture();
 				this.deplacement(this.getChemin().get(this.getChemin().size()-1));
-				this.getChemin().remove(-1);
+				this.getChemin().remove(this.getChemin().size()-1);
 			}
 		}
 		

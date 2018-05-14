@@ -1,6 +1,7 @@
 package pkg_fourmi;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Insecte {
 
@@ -11,11 +12,16 @@ public abstract class Insecte {
 	private int endurance;
 	private int force;
 
-	public Insecte(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force) {
+	public Insecte(Coordonnee position, int endurance, int force) {
+		Random rd = new Random();
+		Nom[] listNom = Nom.values();
+		Prenom[] listPrenom = Prenom.values();
+		Nom nom = listNom[rd.nextInt(listNom.length)];
+		Prenom prenom = listPrenom[rd.nextInt(listPrenom.length)];
 		this.position = position;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.champvision = champvision;
+		this.champvision = 4;
 		this.endurance = endurance;
 		this.force = force;
 	}
@@ -78,6 +84,32 @@ public abstract class Insecte {
 		Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(this);
 	}
 	
+	public void attaquer(Coordonnee position){
+		int x = position.getX();
+		int y = position.getY();
+		Insecte insecte = Simulation.getGrille()[x][y].getInsecte();
+		insecte.setEndurance(Math.max(0,insecte.getEndurance()-this.getForce()));
+		System.out.println(this.toString()+" a attaqué "+insecte.toString()+".");
+		if (insecte.getEndurance() == 0) {
+			insecte.mourir();
+		}
+	}
+	
+	public void mourir() {
+		int x = this.getPosition().getX();
+		int y = this.getPosition().getY();
+		Simulation.getGrille()[x][y].setInsecte(null);
+		System.out.println(this.toString()+" est décédée.");
+		if (this instanceof Ennemi) {
+			Simulation.getListEnnemi().remove(this);
+			Simulation.getGrille()[x][y].addNourriture(20);
+		}
+		if (this instanceof Fourmi) {
+			Fourmi fourmi = (Fourmi) this;
+			fourmi.getColonie().getMembres().remove(fourmi);
+		}
+	}
+	
 	public Coordonnee allerA(Coordonnee c){
 		int insecteX = this.position.getX();
 		int insecteY = this.position.getY();
@@ -95,7 +127,7 @@ public abstract class Insecte {
 			posiPossible.add(new Coordonnee(insecteX,insecteY-1));
 		}
 		for (Coordonnee position : posiPossible){
-			if (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null){
+			if ((position.estCorrecte())&&(Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null)){
 				return position;
 			}
 		}
@@ -111,20 +143,25 @@ public abstract class Insecte {
 		posiPossible.add(new Coordonnee(insecteX,insecteY+1));
 		posiPossible.add(new Coordonnee(insecteX,insecteY-1));
 		if (this instanceof Soldate) {
+			ArrayList<Coordonnee> listPosition = new ArrayList<Coordonnee>();
 			for (Coordonnee position : posiPossible){
-				if (Simulation.getGrille()[position.getX()][position.getY()].getType() == TypeCase.Badlands){
-					posiPossible.remove(position);
+				if ((position.estCorrecte())&&(Simulation.getGrille()[position.getX()][position.getY()].getType() == TypeCase.Badlands)){
+					listPosition.add(position);
 				}
+			posiPossible = listPosition;
 			}
 		}
+		
+		ArrayList<Coordonnee> listPosition = new ArrayList<Coordonnee>();
+		
 		for (Coordonnee position : posiPossible){
-			if (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() != null){
-				posiPossible.remove(position);
+			if ((position.estCorrecte())&&(Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null)){
+				listPosition.add(position);
 			}
 		}
-		if (posiPossible.size() != 0){
-			int indice = (int) (Math.random()*posiPossible.size());
-			return posiPossible.get(indice);
+		if (listPosition.size() != 0){
+			int indice = (int) (Math.random()*listPosition.size());
+			return listPosition.get(indice);
 		}
 		else {
 			return this.position;

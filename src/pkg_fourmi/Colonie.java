@@ -1,6 +1,8 @@
 package pkg_fourmi;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Colonie {
 	
@@ -13,6 +15,13 @@ public class Colonie {
 		this.nom = nom;
 		this.stockNourriture = stockNourriture;
 		this.membres = membres;
+	}
+	
+	public Colonie(String nom, int stockNourriture) {
+		super();
+		this.nom = nom;
+		this.stockNourriture = stockNourriture;
+		this.membres = new CopyOnWriteArrayList<Fourmi>();
 	}
 
 	public String getNom() {
@@ -35,6 +44,13 @@ public class Colonie {
 		return membres;
 	}
 
+	public void ajouterFourmi(Fourmi fourmi) {
+		this.getMembres().add(fourmi);
+		int x = fourmi.getPosition().getX();
+		int y = fourmi.getPosition().getY();
+		Simulation.getGrille()[x][y].setInsecte(fourmi);
+	}
+	
 	public void setMembres(List<Fourmi> membres) {
 		this.membres = membres;
 	}

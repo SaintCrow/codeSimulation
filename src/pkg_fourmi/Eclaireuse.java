@@ -9,9 +9,8 @@ public class Eclaireuse extends Fourmi{
 	private boolean retour;
 	private ArrayList<Coordonnee> chemin;
 
-	public Eclaireuse(Coordonnee position, Nom nom, Prenom prenom, int champvision, int endurance, int force,
-			boolean combat) {
-		super(position, nom, prenom, champvision, endurance, force, combat);
+	public Eclaireuse(Coordonnee position, Colonie colonie) {
+		super(position, 1, 1, colonie);
 		this.retour = false;
 		this.chemin = new ArrayList<Coordonnee>();
 	}
@@ -42,7 +41,7 @@ public class Eclaireuse extends Fourmi{
 		if (this.getCombat() == true){
 			if (coordEnnemi != null){
 				if (this.getPosition().distance(coordEnnemi) == 1){
-					this.attaquer();
+					this.attaquer(coordEnnemi);
 				}
 				else{
 					Coordonnee position = this.allerA(coordEnnemi);
@@ -59,7 +58,7 @@ public class Eclaireuse extends Fourmi{
 			this.setCombat(true);
 			this.poserPheromoneDanger();
 			if (this.getPosition().distance(coordEnnemi) == 1){
-				this.attaquer();
+				this.attaquer(coordEnnemi);
 			}
 			else{
 				Coordonnee position = this.allerA(coordEnnemi);
@@ -116,7 +115,8 @@ public class Eclaireuse extends Fourmi{
 		ArrayList<Coordonnee> listNourriture = new ArrayList<Coordonnee>();
 		for (int i = x-getChampvision(); i <= x + this.getChampvision(); i++){
 			for (int j = y-getChampvision(); j <= y + this.getChampvision(); j++){
-				if (Simulation.getGrille()[i][j].getNourriture() > 0){
+				Coordonnee position = new Coordonnee(i,j);
+				if ((position.estCorrecte())&&(Simulation.getGrille()[i][j].getNourriture() > 0)){
 					listNourriture.add(Simulation.getGrille()[i][j].getPosition());
 				}
 			}
@@ -138,6 +138,14 @@ public class Eclaireuse extends Fourmi{
 		}
 
 	}
+	
+	@Override
+	public String toString(){
+		String s = "Eclaireuse " + this.getPrenom() + " " + this.getNom();
+		return s;
+	}
+
+	
 	
 
 }

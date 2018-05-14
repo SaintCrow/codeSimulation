@@ -2,8 +2,6 @@ package pkg_fourmi;
 
 import java.util.ArrayList;
 
-import java.util.List;
-
 public class Eclaireuse extends Fourmi{
 	
 	private boolean retour;
@@ -35,6 +33,8 @@ public class Eclaireuse extends Fourmi{
 		
 		Coordonnee coordEnnemi = this.rechercheEnnemi();
 		Coordonnee coordNourriture = this.rechercheNourriture();
+		Coordonnee coordPheroNourriture = this.recherchePheromoneNourriture();
+		Coordonnee coordPheroDanger = this.recherchePheromoneDanger();
 		Coordonnee coordFourmi = this.getPosition();
 		int x = coordFourmi.getX();
 		int y = coordFourmi.getY();
@@ -52,6 +52,11 @@ public class Eclaireuse extends Fourmi{
 			}
 		}
 		
+		else if (coordPheroDanger != null) {
+			Coordonnee position = this.allerA(coordPheroDanger);
+			this.deplacement(position);
+		}
+		
 		else if (this.getRetour() == true){
 			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
 				this.setRetour(false);
@@ -65,10 +70,17 @@ public class Eclaireuse extends Fourmi{
 			}
 		}
 		
-		else if (coordNourriture != null){
-			this.setRetour(true);
+		else if ((coordNourriture != null)&&(coordPheroNourriture == null)){
 			this.poserPheromoneNourriture();
-			this.deplacement(this.getChemin().get(-1));
+			this.setRetour(true);
+			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
+				this.setRetour(false);
+				Coordonnee position = allerAleatoire();
+				this.deplacement(position);
+			}
+			else {
+				this.deplacement(this.getChemin().get(-1));
+			}
 		}
 		
 		else {

@@ -29,6 +29,7 @@ public class Soldate extends Fourmi{
 		else {
 			Coordonnee position = allerAleatoire();
 			this.deplacement(position);
+			System.out.println(this.toString()+this.getPosition().toString());
 		}
 		
 	}

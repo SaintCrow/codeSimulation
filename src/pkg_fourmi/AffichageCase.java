@@ -12,18 +12,25 @@ import javax.swing.JPanel;
 
 public class AffichageCase extends JPanel {
 	/**
-	 * 
+	 * fonction affichant la grille
 	 */
 	private static final long serialVersionUID = 1L;
 	int[][][] grille = new int[100][100][3]; // grille contenant les couleurs
 	ArrayList<int[]> postionEnnemis = new ArrayList<int[]>();
 	ArrayList<int[]> postionFourmis = new ArrayList<int[]>();
+	/**
+	 * fonction définissant la taille de la grille et la couleur du fond
+	 */
 	public AffichageCase() {
 		setSize(1000, 1000);
 		setBackground(Color.blue);
 	}
 
 	@Override // la fonction marche avec un call repaint()
+	/**
+	 * fonction affichant les ennemis en rouge et les fourmis en noir
+	 * @param g dessin pour les insectes
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D dessin = (Graphics2D) g;
@@ -44,6 +51,11 @@ public class AffichageCase extends JPanel {
 			dessin.fill(new Ellipse2D.Double(xy[0]*10, xy[1]*10, 10, 10));
 		}
 	}
+	/**
+	 * fonction utilisée pour faire des tests sur l'affichage graphique à l'aide d'une fonction random
+	 * pour tester les différentes teintes de couleur 
+	 * @param c les cases de la grille
+	 */
 
 	public void setGrilleR(Case[][] c) {
 		int Max = 240;
@@ -64,13 +76,19 @@ public class AffichageCase extends JPanel {
 		this.postionEnnemis.add(new int[] {0,20});
 		this.postionFourmis.add(new int[] {15,70});
 	}
+	
+	/**
+	 * fonction fixant une valeur maximale pour la nourriture et les phéromones afin de créer une échelle de teintes
+	 * elle récupère la position des insectes et fixe les couleurs pour les cases occupées par des phéromones ou de la nourriture
+	 * @param cases les cases de la grille
+	 */
 	public void setGrille(Case[][] cases) {
 		this.postionEnnemis.clear();
 		this.postionFourmis.clear();
 		
-		int valeurMaxNouriture = 1000;
-		int valeurMaxPherNouriture =1000;
-		int valeurMaxPherDanger = 1000;
+		float valeurMaxNouriture = 100;
+		float valeurMaxPherNouriture =100;
+		float valeurMaxPherDanger = 100;
 		
 		int x = 0;
 		int y = 0;
@@ -87,10 +105,12 @@ public class AffichageCase extends JPanel {
 				}
 				x=c.getPosition().getX();
 				y=c.getPosition().getY();
-				
-				this.grille[x][y][0] = (int) ( 255*(c.getNourriture()/valeurMaxNouriture));
-				this.grille[x][y][1] = (int) ( 255*(c.getPheroDanger()/valeurMaxPherDanger));
-				this.grille[x][y][2] = (int) ( 255*(c.getPheroNourriture()/valeurMaxPherNouriture));
+				float nourriture = (float)(c.getNourriture());
+				float pheroD = (float)(c.getPheroDanger());
+				float pheroN = (float)(c.getPheroNourriture());
+				this.grille[x][y][1] = (int) (100 + 150*(nourriture/valeurMaxNouriture));
+				this.grille[x][y][0] = (int) (100 + 150*(pheroD/valeurMaxPherDanger));
+				this.grille[x][y][2] = (int) (100 + 150*(pheroN/valeurMaxPherNouriture));
 				for(int i=0;i<3;i++){
 					if(this.grille[x][y][i]>255){
 						this.grille[x][y][i]=255;

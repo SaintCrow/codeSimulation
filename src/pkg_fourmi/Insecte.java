@@ -138,7 +138,7 @@ public abstract class Insecte {
 		if (this instanceof Soldate) {
 			ArrayList<Coordonnee> listPosition = new ArrayList<Coordonnee>();
 			for (Coordonnee position : posiPossible){
-				if ((position.estCorrecte())&&(Simulation.getGrille()[position.getX()][position.getY()].getType() == TypeCase.Badlands)){
+				if ((position.estCorrecte())&&(Simulation.getGrille()[position.getX()][position.getY()].getType() != TypeCase.Badlands)){
 					listPosition.add(position);
 				}
 			posiPossible = listPosition;

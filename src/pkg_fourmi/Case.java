@@ -10,7 +10,7 @@ public class Case {
 	
 	/**
 	 * constructeur de case 
-	 * ( la case au début ne contient pas de phéromones)
+	 * ( la case au début ne contient pas de pheromones)
 	 * @param pos position de la case
 	 * @param ins insecte sur la case (null si vide)
 	 * @param nour quantite de nourriture
@@ -24,28 +24,61 @@ public class Case {
 		this.type = type;
 	}
 	
-	
+	/**
+	 * getter type de la case
+	 * 
+	 * @return type
+	 */
 	
 	
 	public TypeCase getType() {
 		return type;
 	}
 	
+	/**
+	 * getter pheromone de nourriture
+	 * 
+	 * @return pheromoneNourriture
+	 */
 	public int getPheroNourriture() {
 		return pheroNourriture;
 	}
+	
+	/**
+	 * getter pheromone de danger
+	 * 
+	 * @return pheroDanger
+	 */
 
 	public int getPheroDanger() {
 		return pheroDanger;
 	}
+	
+	/**
+	 * getter insecte
+	 * 
+	 * @return insecte
+	 */
 
 	public Insecte getInsecte() {
 		return insecte;
 	}
+	
+	/**
+	 * getter nourriture
+	 * 
+	 * @return nourriture
+	 */
 
 	public int getNourriture() {
 		return nourriture;
 	}
+	
+	/**
+	 * getter position
+	 * 
+	 * @return position
+	 */
 	
 	public Coordonnee getPosition() {
 		return position;
@@ -74,6 +107,12 @@ public class Case {
 	public void addPheroNourriture(int q){
 		this.pheroNourriture+= q;		
 	}
+	
+	/**
+	 * set insecte insecte
+	 * 
+	 * @param insecte
+	 */
 
 	public void setInsecte(Insecte insecte) {
 		this.insecte = insecte;

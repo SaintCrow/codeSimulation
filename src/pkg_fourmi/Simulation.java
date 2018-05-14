@@ -3,7 +3,10 @@ package pkg_fourmi;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import javax.swing.JFrame;
 
 public class Simulation {
 
@@ -11,7 +14,7 @@ public class Simulation {
 	private static Case[][] grille;
 	private static int hauteur;
 	private static int largeur;
-	private static List<Ennemi> listEnnemi;
+	private static List<Ennemi> listEnnemi = new ArrayList<Ennemi>();
 
 	public Colonie getColonie() {
 		return colonie;
@@ -29,57 +32,47 @@ public class Simulation {
 		return listEnnemi;
 	}
 
-	public void initialisation(int nbTravailleuse, int nbEclaireuse, int nbSoldate, int haut, int larg, int nourMap, int nourColonie ){
+	public static void initialisation(int nbTravailleuse, int nbEclaireuse, int nbSoldate, int haut, int larg, int nourMap, int nourColonie){
 		hauteur = haut;
 		largeur = larg;
 		grille = new Case[largeur][hauteur];
 		Coordonnee centre = new Coordonnee(((int)largeur/2),((int)hauteur/2));
-		Random rd = new Random();
-		int nour = 0;
-		TypeCase type ;
-		Coordonnee c;
 		
+		//Creation de la carte :
 		for(int i=0; i < largeur;i++){
-			for(int j=0; j< hauteur;j++){
-				
-				if(rd.nextBoolean()){
-					nour = (int) (nourMap*rd.nextFloat());
-					nourMap-=nour;					
+			for(int j=0; j < hauteur;j++){
+				if (new Coordonnee(i,j).euclidienne(centre) < 5){
+					grille[i][j] = new Case(new Coordonnee(i,j), null, 0, TypeCase.Fourmiliere);
 				}
-				
-				c = new Coordonnee(i,j);
-				if(c.euclidienne(centre)<=10){
-					type = TypeCase.Fourmiliere;
+				else if (new Coordonnee(i,j).euclidienne(centre) < 80){
+					grille[i][j] = new Case(new Coordonnee(i,j), null, 0, TypeCase.Territoire);
 				}
-				else if(c.euclidienne(centre)<=30){
-					type = TypeCase.Territoire;
-				}
-				else{
-					type = TypeCase.Badlands;
-				}
-				grille[i][j] = new Case(c,null,nour,type);
-				nour = 0;
-			}
-			
-		}
-		// depose le reste de nourriture au hasard
-		if(nourMap>0){
-			int x_depot = (int) (rd.nextFloat()*largeur);
-			int y_depot = (int) (rd.nextFloat()*hauteur);
-			grille[x_depot][y_depot].addNourriture(nourMap);
-		}
-		while(nbTravailleuse>0){
-			int x = (int)(rd.nextFloat()*largeur);
-			int y = (int)(rd.nextFloat()*hauteur);
-			if(grille[x][y].getType() == TypeCase.Fourmiliere){
-				if(grille[x][y].getInsecte() == null){
-					grille[x][y].setInsecte(new Transporteuse(new Coordonnee(x,y), colonie));
+				else {
+					grille[i][j] = new Case(new Coordonnee(i,j), null, 0, TypeCase.Badlands);
 				}
 			}
 		}
 		
+		//Ajout de la nourriture sur la carte :
+		Random rd = new Random();
+		for (int i = 0; i < nourMap; i++){
+			int x = rd.nextInt(largeur);
+			int y = rd.nextInt(hauteur);
+			grille[x][y].addNourriture(50);
+		}
+		
+		//Creation de la colonie et des premiers individus :
+
+		colonie = new Colonie("Colonie", nourColonie);
+		
+		Fourmi reine = new Reine(centre, colonie);
+		colonie.ajouterFourmi(reine);
+		
+		Ennemi ennemi1 = new Ennemi(new Coordonnee(0,0)) ;
+		ajouterEnnemi(ennemi1);
 		
 	}
+	
 	public static Case[][] getGrille(){
 		return grille;
 	}
@@ -97,39 +90,39 @@ public class Simulation {
 
 	public static void main(String[] args) {
 		
-		/**
-		 * Ce qui suis est un test !
-		 * Si quelqu'un souhaite utiliser son propre main, qu'il mette celui-la en commentaire.
-		 */
+		//Saisi des parametres de la simulation :
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Hauteur de la carte ?");
+		int haut = 100;
+		System.out.println("Largeur de la carte ?");
+		int larg = 100;
+		System.out.println("Nombre de points de nourriture ?");
+		int nourMap = 100;
+		System.out.println("Quantite de nourriture de la colonie ?");
+		int nourColonie =100;
+		scan.close();
 		
-		hauteur = 11;
-		largeur = 11;
-		listEnnemi = new CopyOnWriteArrayList<Ennemi>();
-		grille = new Case[11][11];
-		Coordonnee centre = new Coordonnee(((int)11/2),((int)11/2));
-		for(int i=0; i < 11;i++){
-			for(int j=0; j< 11;j++){
-				grille[i][j] = new Case(new Coordonnee(i,j), null, 0, TypeCase.Territoire);
-			}
-		}
-			
-		Colonie colonie = new Colonie("Colonie", 50);
+		//Initialisation de la carte :
+		initialisation(0, 0, 0, haut, larg, nourMap, nourColonie);
+		grille[10][10].addNourriture(50);
+		//Initialisation de l'affichage :
+		JFrame fenetre = new JFrame();
+		AffichageCase cases = new AffichageCase();
+		fenetre.add(cases);
+		fenetre.setSize(10*largeur, 10*hauteur);
 		
-		Fourmi reine = new Reine(centre, colonie);
-		colonie.ajouterFourmi(reine);
-		
-		Ennemi ennemi1 = new Ennemi(new Coordonnee(0,0)) ;
-		ajouterEnnemi(ennemi1);
-		
+		//Debut de la simulation :
 		int nbr_tour = 1;
 		
-		while ((colonie.getMembres().contains(reine))&&(nbr_tour < 300)) {
+		long time = System.currentTimeMillis();
+		
+		while ((colonie.getMembres().get(0) instanceof Reine)&&(nbr_tour < 300)) {
+			
 			System.out.println("Tour : "+nbr_tour);
 			for (Ennemi ennemi : listEnnemi) {
 				ennemi.action();
 			}
 			for (Fourmi fourmi : colonie.getMembres()) {
-				System.out.println(fourmi);
 				fourmi.action();
 			}
 			System.out.println("   - Stock de nourriture : "+colonie.getStockNourriture());
@@ -137,7 +130,19 @@ public class Simulation {
 			System.out.println("   - Nombres d'ennemis : "+Simulation.getListEnnemi().size());
 			System.out.println("  ");
 			nbr_tour ++;
+			
+			while (System.currentTimeMillis() - time < 500){
+				
+			}
+			time = System.currentTimeMillis();
+			
+			cases.setGrille(grille);
+			cases.repaint();
+			fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			fenetre.setVisible(true);
 		}
+		
+
 
 	}
 

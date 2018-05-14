@@ -76,87 +76,92 @@ public abstract class Insecte {
 
 	/**
 	 * deplace l'insecte( change sa coordonnee
+	 * 
 	 * @param c
 	 */
-	public void deplacement(Coordonnee c){
-		Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(null);
-		this.position = c;
-		Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(this);
+	public void deplacement(Coordonnee c) {
+		if (c.estCorrecte()) {
+			Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(null);
+			this.position = c;
+			Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(this);
+		}
 	}
-	
-	public void attaquer(Coordonnee position){
+
+	public void attaquer(Coordonnee position) {
 		int x = position.getX();
 		int y = position.getY();
 		Insecte insecte = Simulation.getGrille()[x][y].getInsecte();
-		insecte.setEndurance(Math.max(0,insecte.getEndurance()-this.getForce()));
-		System.out.println(this.toString()+" a attaqu� "+insecte.toString()+".");
+		insecte.setEndurance(Math.max(0, insecte.getEndurance() - this.getForce()));
+		System.out.println(this.toString() + " a attaqu� " + insecte.toString() + ".");
 		if (insecte.getEndurance() == 0) {
 			insecte.mourir();
 		}
 	}
-	
+
 	public void mourir() {
 		int x = this.getPosition().getX();
 		int y = this.getPosition().getY();
 		Simulation.getGrille()[x][y].setInsecte(null);
-		System.out.println(this.toString()+" est d�c�d�e.");
-				
+		System.out.println(this.toString() + " est d�c�d�e.");
+
 	}
-	
-	public Coordonnee allerA(Coordonnee c){
+
+	public Coordonnee allerA(Coordonnee c) {
 		int insecteX = this.position.getX();
 		int insecteY = this.position.getY();
 		ArrayList<Coordonnee> posiPossible = new ArrayList<Coordonnee>();
-		if (insecteX < c.getX()){
-			posiPossible.add(new Coordonnee(insecteX+1,insecteY));
+		if (insecteX < c.getX()) {
+			posiPossible.add(new Coordonnee(insecteX + 1, insecteY));
 		}
-		if (insecteX > c.getX()){
-			posiPossible.add(new Coordonnee(insecteX-1,insecteY));
+		if (insecteX > c.getX()) {
+			posiPossible.add(new Coordonnee(insecteX - 1, insecteY));
 		}
-		if (insecteY < c.getY()){
-			posiPossible.add(new Coordonnee(insecteX,insecteY+1));
+		if (insecteY < c.getY()) {
+			posiPossible.add(new Coordonnee(insecteX, insecteY + 1));
 		}
-		if (insecteY > c.getY()){
-			posiPossible.add(new Coordonnee(insecteX,insecteY-1));
+		if (insecteY > c.getY()) {
+			posiPossible.add(new Coordonnee(insecteX, insecteY - 1));
 		}
-		for (Coordonnee position : posiPossible){
-			if ((position.estCorrecte())&&(Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null)){
+		for (Coordonnee position : posiPossible) {
+			if ((position.estCorrecte())
+					&& (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null)) {
 				return position;
 			}
 		}
 		return this.position;
 	}
-	
-	public Coordonnee allerAleatoire(){
+
+	public Coordonnee allerAleatoire() {
 		int insecteX = this.position.getX();
 		int insecteY = this.position.getY();
 		ArrayList<Coordonnee> posiPossible = new ArrayList<Coordonnee>();
-		posiPossible.add(new Coordonnee(insecteX+1,insecteY));
-		posiPossible.add(new Coordonnee(insecteX-1,insecteY));
-		posiPossible.add(new Coordonnee(insecteX,insecteY+1));
-		posiPossible.add(new Coordonnee(insecteX,insecteY-1));
+		posiPossible.add(new Coordonnee(insecteX + 1, insecteY));
+		posiPossible.add(new Coordonnee(insecteX - 1, insecteY));
+		posiPossible.add(new Coordonnee(insecteX, insecteY + 1));
+		posiPossible.add(new Coordonnee(insecteX, insecteY - 1));
 		if (this instanceof Soldate) {
 			ArrayList<Coordonnee> listPosition = new ArrayList<Coordonnee>();
-			for (Coordonnee position : posiPossible){
-				if ((position.estCorrecte())&&(Simulation.getGrille()[position.getX()][position.getY()].getType() != TypeCase.Badlands)){
+			for (Coordonnee position : posiPossible) {
+				if ((position.estCorrecte())
+						&& (Simulation.getGrille()[position.getX()][position.getY()].getType() != TypeCase.Badlands)) {
 					listPosition.add(position);
 				}
-			posiPossible = listPosition;
+				posiPossible = listPosition;
 			}
 		}
-		
+
 		ArrayList<Coordonnee> listPosition = new ArrayList<Coordonnee>();
-		
-		for (Coordonnee position : posiPossible){
-			if ((position.estCorrecte())&&(Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null)){
+
+		for (Coordonnee position : posiPossible) {
+			if ((position.estCorrecte())
+					&& (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null)) {
 				listPosition.add(position);
 			}
 		}
-		if (listPosition.size() != 0){
-			int indice = (int) (Math.random()*listPosition.size());
+		if (listPosition.size() != 0) {
+			int indice = (int) (Math.random() * listPosition.size());
 			return listPosition.get(indice);
-		}
-		else {
+		} else {
 			return this.position;
 		}
 	}

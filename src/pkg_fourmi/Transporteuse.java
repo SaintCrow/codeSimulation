@@ -2,8 +2,8 @@ package pkg_fourmi;
 
 import java.util.List;
 
-public class Transporteuse  extends Eclaireuse{
-	
+public class Transporteuse extends Eclaireuse {
+
 	private int nourriture;
 
 	public Transporteuse(Coordonnee position, Colonie colonie) {
@@ -18,40 +18,46 @@ public class Transporteuse  extends Eclaireuse{
 	public void setNourriture(int nourriture) {
 		this.nourriture = nourriture;
 	}
-	
-	public void recupererNourriture(Coordonnee position){
+
+	public void recupererNourriture(Coordonnee position) {
 		int x = position.getX();
 		int y = position.getY();
 		int nourritureRecup = Math.min(10, Simulation.getGrille()[x][y].getNourriture());
 		Simulation.getGrille()[x][y].addNourriture(-nourritureRecup);
 		this.nourriture = nourritureRecup;
 		this.setRetour(true);
-		System.out.println(this.toString()+" a r�cup�r� de la nourriture.");
+		System.out.println(this.toString() + " a r�cup�r� de la nourriture.");
 	}
-	
+
 	public void deposerNourriture() {
-		this.getColonie().setStockNourriture(this.getColonie().getStockNourriture()+this.nourriture);
+		this.getColonie().setStockNourriture(this.getColonie().getStockNourriture() + this.nourriture);
 		this.nourriture = 0;
 		this.setRetour(false);
-		System.out.println(this.toString()+" a rapport� de la nourriture � la fourmili�re.");
+		System.out.println(this.toString() + " a rapport� de la nourriture � la fourmili�re.");
 	}
-	
-	public Coordonnee suivrePheromone(){
-		
-		for(int i = 0;i<this.getChampvision();i++){
-			for(int j = 0; j<this.getChampvision();j++){
-				if(Simulation.getGrille()[i][j].getPheroNourriture()>0 && this.chemin.contains(Simulation.getGrille()[i][j].getPosition())){
-					if(Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].getPheroNourriture()==0 || Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].getPheroNourriture()-Simulation.getGrille()[i][j].getPheroNourriture()==-1 || Math.abs(Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].getPheroNourriture()-Simulation.getGrille()[i][j].getPheroNourriture())<=19 )
-					return Simulation.getGrille()[i][j].getPosition();
+
+	public Coordonnee suivrePheromone() {
+
+		for (int i = 0; i < this.getChampvision(); i++) {
+			for (int j = 0; j < this.getChampvision(); j++) {
+				if (Simulation.getGrille()[i][j].getPheroNourriture() > 0
+						&& this.chemin.contains(Simulation.getGrille()[i][j].getPosition())) {
+					if (Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()]
+							.getPheroNourriture() == 0
+							|| Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()]
+									.getPheroNourriture() - Simulation.getGrille()[i][j].getPheroNourriture() == -1
+							|| Math.abs(Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()]
+									.getPheroNourriture() - Simulation.getGrille()[i][j].getPheroNourriture()) <= 19)
+						return Simulation.getGrille()[i][j].getPosition();
 				}
 			}
 		}
 		return null;
-		
+
 	}
-	
-	public void action(){
-		
+
+	public void action() {
+
 		Coordonnee coordEnnemi = this.rechercheEnnemi();
 		Coordonnee coordNourriture = this.rechercheNourriture();
 		Coordonnee coordPheroDanger = this.recherchePheromoneDanger();
@@ -60,65 +66,60 @@ public class Transporteuse  extends Eclaireuse{
 
 		int x = coordFourmi.getX();
 		int y = coordFourmi.getY();
-		
-		if (coordEnnemi != null){
-			if (Simulation.getGrille()[x][y].getPheroDanger() == 0){
+
+		if (coordEnnemi != null) {
+			if (Simulation.getGrille()[x][y].getPheroDanger() == 0) {
 				this.poserPheromoneDanger();
 			}
-			if (this.nourriture > 0){
+			if (this.nourriture > 0) {
 				Simulation.getGrille()[x][y].addNourriture(this.nourriture);
 				this.nourriture = 0;
 				this.setRetour(false);
 				this.poserPheromoneDanger();
 			}
-			if (this.getPosition().distance(coordEnnemi) == 1){
+			if (this.getPosition().distance(coordEnnemi) == 1) {
 				this.attaquer(coordEnnemi);
-			}
-			else{
+			} else {
 				Coordonnee position = this.allerA(coordEnnemi);
 				this.deplacement(position);
 			}
 		}
-		
+
 		else if (coordPheroDanger != null) {
 			Coordonnee position = this.allerA(coordPheroDanger);
 			this.deplacement(position);
 		}
-		
-		else if (this.getRetour() == true){
-			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
+
+		else if (this.getRetour() == true) {
+			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere) {
 				this.deposerNourriture();
-			}
-			else{
+			} else {
 				this.poserPheromoneNourriture();
 				this.deplacement(this.getChemin().get(-1));
 				this.getChemin().remove(-1);
 			}
 		}
-		
-		else if (coordNourriture != null){
-			if (this.getPosition().distance(coordNourriture) == 1){
+
+		else if (coordNourriture != null) {
+			if (this.getPosition().distance(coordNourriture) == 1) {
 				this.recupererNourriture(coordNourriture);
-			}
-			else {
+			} else {
 				Coordonnee position = this.allerA(coordNourriture);
 				this.deplacement(position);
 			}
-		}
-		else if(pisteNourr != null){
+		} else if (pisteNourr != null) {
 			this.deplacement(allerA(pisteNourr));
-		}
-		else {
+		} else {
 			Coordonnee position = allerAleatoire();
 			this.deplacement(position);
 		}
-	
+
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		String s = "Transporteuse " + this.getPrenom() + " " + this.getNom();
 		return s;
 	}
-	
+
 }

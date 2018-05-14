@@ -110,6 +110,8 @@ public class Simulation {
 		AffichageCase cases = new AffichageCase();
 		fenetre.add(cases);
 		fenetre.setSize(10*largeur, 10*hauteur);
+		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fenetre.setVisible(true);
 		
 		//Debut de la simulation :
 		int nbr_tour = 1;
@@ -131,15 +133,14 @@ public class Simulation {
 			System.out.println("  ");
 			nbr_tour ++;
 			
-			while (System.currentTimeMillis() - time < 500){
+			while (System.currentTimeMillis() - time < 250){
 				
 			}
 			time = System.currentTimeMillis();
 			
 			cases.setGrille(grille);
 			cases.repaint();
-			fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			fenetre.setVisible(true);
+			
 		}
 		
 

@@ -28,6 +28,13 @@ public class Eclaireuse extends Fourmi{
 	public void setChemin(ArrayList<Coordonnee> chemin) {
 		this.chemin = chemin;
 	}
+	@Override
+	public void deplacement(Coordonnee c){
+		super.deplacement(c);
+		if(this.retour==false){
+			this.chemin.add(c);
+		}
+	}
 	
 	public void action(){
 		
@@ -65,7 +72,7 @@ public class Eclaireuse extends Fourmi{
 			}
 			else{
 				this.poserPheromoneNourriture();
-				this.deplacement(this.getChemin().get(-1));
+				this.deplacement(this.getChemin().get(this.getChemin().size()-1));
 				this.getChemin().remove(-1);
 			}
 		}
@@ -77,9 +84,10 @@ public class Eclaireuse extends Fourmi{
 				this.setRetour(false);
 				Coordonnee position = allerAleatoire();
 				this.deplacement(position);
+				
 			}
 			else {
-				this.deplacement(this.getChemin().get(-1));
+				this.deplacement(this.getChemin().get(this.getChemin().size()-1));
 			}
 		}
 		

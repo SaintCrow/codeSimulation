@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JFrame;
 
@@ -41,10 +40,10 @@ public class Simulation {
 		//Creation de la carte :
 		for(int i=0; i < largeur;i++){
 			for(int j=0; j < hauteur;j++){
-				if (new Coordonnee(i,j).euclidienne(centre) < 5){
+				if (new Coordonnee(i,j).euclidienne(centre) < 6){
 					grille[i][j] = new Case(new Coordonnee(i,j), null, 0, TypeCase.Fourmiliere);
 				}
-				else if (new Coordonnee(i,j).euclidienne(centre) < 80){
+				else if (new Coordonnee(i,j).euclidienne(centre) < 40){
 					grille[i][j] = new Case(new Coordonnee(i,j), null, 0, TypeCase.Territoire);
 				}
 				else {
@@ -104,12 +103,14 @@ public class Simulation {
 		
 		//Initialisation de la carte :
 		initialisation(0, 0, 0, haut, larg, nourMap, nourColonie);
-		grille[10][10].addNourriture(50);
+
 		//Initialisation de l'affichage :
 		JFrame fenetre = new JFrame();
 		AffichageCase cases = new AffichageCase();
 		fenetre.add(cases);
 		fenetre.setSize(10*largeur, 10*hauteur);
+		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fenetre.setVisible(true);
 		
 		//Debut de la simulation :
 		int nbr_tour = 1;
@@ -131,15 +132,14 @@ public class Simulation {
 			System.out.println("  ");
 			nbr_tour ++;
 			
-			while (System.currentTimeMillis() - time < 500){
+			while (System.currentTimeMillis() - time < 250){
 				
 			}
 			time = System.currentTimeMillis();
 			
 			cases.setGrille(grille);
 			cases.repaint();
-			fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			fenetre.setVisible(true);
+			
 		}
 		
 

@@ -84,9 +84,9 @@ public class AffichageCase extends JPanel {
 				x=c.getPosition().getX();
 				y=c.getPosition().getY();
 				
-				this.grille[x][y][0] = (int) ( 255*(c.getNourriture()/valeurMaxNouriture));
-				this.grille[x][y][1] = (int) ( 255*(c.getPheroDanger()/valeurMaxPherDanger));
-				this.grille[x][y][2] = (int) ( 255*(c.getPheroNourriture()/valeurMaxPherNouriture));
+				this.grille[x][y][0] = (int) (255 - 255*(c.getNourriture()/valeurMaxNouriture));
+				this.grille[x][y][1] = (int) (255 - 255*(c.getPheroDanger()/valeurMaxPherDanger));
+				this.grille[x][y][2] = (int) (255 - 255*(c.getPheroNourriture()/valeurMaxPherNouriture));
 				for(int i=0;i<3;i++){
 					if(this.grille[x][y][i]>255){
 						this.grille[x][y][i]=255;

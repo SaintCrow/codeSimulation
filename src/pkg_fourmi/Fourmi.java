@@ -4,22 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Fourmi extends Insecte{
 	
-	private boolean combat;
 	private Colonie colonie;
 		
 	public Fourmi(Coordonnee position, int endurance, int force, Colonie colonie) {
 		super(position, endurance, force);
-		this.combat = combat;
 		this.colonie = colonie;
-		this.combat = false;
-	}
-
-	public boolean getCombat() {
-		return combat;
-	}
-
-	public void setCombat(boolean combat) {
-		this.combat = combat;
 	}	
 
 	public Colonie getColonie() {
@@ -53,6 +42,28 @@ public abstract class Fourmi extends Insecte{
 				}
 			}
 			return coordPlusProche;
+		}
+	}
+	
+	public void poserPheromoneDanger(){
+		Coordonnee coordFourmi = this.getPosition();
+		int x = coordFourmi.getX();
+		int y = coordFourmi.getY();
+		for (int i = x-4; i <= x+4; i++){
+			for (int j = y-4; j <= y+4; j++){
+				if (new Coordonnee(i,j).distance(coordFourmi) <= 4){
+					Simulation.getGrille()[x][y].addPheroDanger(5);
+				}
+				if (new Coordonnee(i,j).distance(coordFourmi) <= 3){
+					Simulation.getGrille()[x][y].addPheroDanger(5);
+				}
+				if (new Coordonnee(i,j).distance(coordFourmi) <= 2){
+					Simulation.getGrille()[x][y].addPheroDanger(5);
+				}
+				if (new Coordonnee(i,j).distance(coordFourmi) <= 1){
+					Simulation.getGrille()[x][y].addPheroDanger(5);
+				}
+			}
 		}
 	}
 	

@@ -26,14 +26,14 @@ public class Transporteuse  extends Eclaireuse{
 		Simulation.getGrille()[x][y].addNourriture(-nourritureRecup);
 		this.nourriture = nourritureRecup;
 		this.setRetour(true);
-		System.out.println(this.toString()+" a récupéré de la nourriture.");
+		System.out.println(this.toString()+" a rï¿½cupï¿½rï¿½ de la nourriture.");
 	}
 	
 	public void deposerNourriture() {
 		this.getColonie().setStockNourriture(this.getColonie().getStockNourriture()+this.nourriture);
 		this.nourriture = 0;
 		this.setRetour(false);
-		System.out.println(this.toString()+" a rapporté de la nourriture à la fourmilière.");
+		System.out.println(this.toString()+" a rapportï¿½ de la nourriture ï¿½ la fourmiliï¿½re.");
 	}
 	
 	public void action(){
@@ -42,28 +42,13 @@ public class Transporteuse  extends Eclaireuse{
 		Coordonnee coordNourriture = this.rechercheNourriture();
 		Coordonnee coordPheroDanger = this.recherchePheromoneDanger();
 		Coordonnee coordFourmi = this.getPosition();
+		int x = coordFourmi.getX();
+		int y = coordFourmi.getY();
 		
-		
-		if (this.getCombat() == true){
-			if (coordEnnemi != null){
-				if (this.getPosition().distance(coordEnnemi) == 1){
-					this.attaquer(coordEnnemi);
-				}
-				else{
-					Coordonnee position = this.allerA(coordEnnemi);
-					this.deplacement(position);
-				}
+		if (coordEnnemi != null){
+			if (Simulation.getGrille()[x][y].getPheroDanger() == 0){
+				this.poserPheromoneDanger();
 			}
-			else{
-				Coordonnee position = allerAleatoire();
-				this.deplacement(position);
-			}
-		}
-		
-		else if (coordEnnemi != null){
-			int x = coordFourmi.getX();
-			int y = coordFourmi.getY();
-			this.setCombat(true);
 			if (this.nourriture > 0){
 				Simulation.getGrille()[x][y].addNourriture(this.nourriture);
 				this.nourriture = 0;
@@ -85,8 +70,6 @@ public class Transporteuse  extends Eclaireuse{
 		}
 		
 		else if (this.getRetour() == true){
-			int x = coordFourmi.getX();
-			int y = coordFourmi.getY();
 			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
 				this.deposerNourriture();
 			}

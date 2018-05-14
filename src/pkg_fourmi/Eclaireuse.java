@@ -36,27 +36,13 @@ public class Eclaireuse extends Fourmi{
 		Coordonnee coordEnnemi = this.rechercheEnnemi();
 		Coordonnee coordNourriture = this.rechercheNourriture();
 		Coordonnee coordFourmi = this.getPosition();
+		int x = coordFourmi.getX();
+		int y = coordFourmi.getY();
 		
-		
-		if (this.getCombat() == true){
-			if (coordEnnemi != null){
-				if (this.getPosition().distance(coordEnnemi) == 1){
-					this.attaquer(coordEnnemi);
-				}
-				else{
-					Coordonnee position = this.allerA(coordEnnemi);
-					this.deplacement(position);
-				}
+		if (coordEnnemi != null){
+			if (Simulation.getGrille()[x][y].getPheroDanger() == 0){
+				this.poserPheromoneDanger();
 			}
-			else{
-				Coordonnee position = allerAleatoire();
-				this.deplacement(position);
-			}
-		}
-		
-		else if (coordEnnemi != null){
-			this.setCombat(true);
-			this.poserPheromoneDanger();
 			if (this.getPosition().distance(coordEnnemi) == 1){
 				this.attaquer(coordEnnemi);
 			}
@@ -67,8 +53,6 @@ public class Eclaireuse extends Fourmi{
 		}
 		
 		else if (this.getRetour() == true){
-			int x = coordFourmi.getX();
-			int y = coordFourmi.getY();
 			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
 				this.setRetour(false);
 				Coordonnee position = allerAleatoire();
@@ -100,14 +84,7 @@ public class Eclaireuse extends Fourmi{
 		int y = coordFourmi.getY();
 		Simulation.getGrille()[x][y].addPheroNourriture(20);
 	}
-	
-	public void poserPheromoneDanger(){
-		Coordonnee coordFourmi = this.getPosition();
-		int x = coordFourmi.getX();
-		int y = coordFourmi.getY();
-		Simulation.getGrille()[x][y].addPheroDanger(20);
-	}
-	
+		
 	public Coordonnee rechercheNourriture(){
 		Coordonnee coordFourmi = this.getPosition();
 		int x = coordFourmi.getX();
@@ -144,8 +121,5 @@ public class Eclaireuse extends Fourmi{
 		String s = "Eclaireuse " + this.getPrenom() + " " + this.getNom();
 		return s;
 	}
-
-	
-	
 
 }

@@ -92,7 +92,7 @@ public abstract class Insecte {
 		int y = position.getY();
 		Insecte insecte = Simulation.getGrille()[x][y].getInsecte();
 		insecte.setEndurance(Math.max(0, insecte.getEndurance() - this.getForce()));
-		System.out.println(this.toString() + " a attaqu� " + insecte.toString() + ".");
+		System.out.println(this.toString() + " a attaque " + insecte.toString() + ".");
 		if (insecte.getEndurance() == 0) {
 			insecte.mourir();
 		}
@@ -102,7 +102,7 @@ public abstract class Insecte {
 		int x = this.getPosition().getX();
 		int y = this.getPosition().getY();
 		Simulation.getGrille()[x][y].setInsecte(null);
-		System.out.println(this.toString() + " est d�c�d�e.");
+		System.out.println(this.toString() + " est decedee.");
 
 	}
 

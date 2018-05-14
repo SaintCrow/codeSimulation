@@ -90,8 +90,8 @@ public class Transporteuse extends Eclaireuse {
 				this.deposerNourriture();
 			} else {
 				this.poserPheromoneNourriture();
-				this.deplacement(this.getChemin().get(-1));
-				this.getChemin().remove(-1);
+				this.deplacement(this.getChemin().get(this.getChemin().size()-1));
+				this.getChemin().remove(this.getChemin().size()-1);
 			}
 		}
 

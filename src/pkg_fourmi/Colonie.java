@@ -58,8 +58,13 @@ public class Colonie {
 		return stockNourriture;
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * set du stock de nourriture
+=======
+	/**5
+	 * getter x
+>>>>>>> abf6ad8946cc3e919cfe98b2c0367af59565bd92
 	 * 
 	 * @param StockNourriture
 	 */

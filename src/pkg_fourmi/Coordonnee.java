@@ -17,7 +17,7 @@ public class Coordonnee {
 
 	/**
 	 * Cette fonction calcule la distance (en case de la grille) entre un objet 
-	 * pris en param�tre et l'insecte qui l'appelle
+	 * pris en parametre et l'insecte qui l'appelle
 	 * 
 	 * @param c 
 	 *            
@@ -29,8 +29,8 @@ public class Coordonnee {
 	}
 	
 	/**
-	 * Cette fonction permet de d�terminer si les coordonn�es d'un objet sont correctes:
-	 * elle renvoie false si l'objet n'est pas dans la grille ou si ses coordonn�es sont n�gatives
+	 * Cette fonction permet de determiner si les coordonnees d'un objet sont correctes:
+	 * elle renvoie false si l'objet n'est pas dans la grille ou si ses coordonnees sont negatives
 	 * et true sinon
 	 * 
 	 * @return boolean
@@ -94,8 +94,8 @@ public class Coordonnee {
 	/**
 	 *Cette fonction nous permet de calculer la distance euclidienne entre l'insecte qui l'appelle et 
 	 *un point c
-	 *Nous avons besoin de cette distance euclidienne pour prendre le rayon du cercle de ph�romones de danger
-	 *pos� par les fourmis lorsqu'elles rep�rent un ennemi	 
+	 *Nous avons besoin de cette distance euclidienne pour prendre le rayon du cercle de pheromones de danger
+	 *pose par les fourmis lorsqu'elles reperent un ennemi	 
 	 *
 	 * @return distance euclidienne entre c et l'insecte
 	 */
@@ -106,7 +106,7 @@ public class Coordonnee {
 	
 	@Override
 	/**
-	* Cette fonction toString nous permet d'afficher facilement les coordonn�es et d'y acc�der
+	* Cette fonction toString nous permet d'afficher facilement les coordonnees et d'y acceder
 	*/
 	public String toString() {
 		return "("+this.x+","+this.y+")";

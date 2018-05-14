@@ -12,18 +12,25 @@ import javax.swing.JPanel;
 
 public class AffichageCase extends JPanel {
 	/**
-	 * 
+	 * fonction affichant la grille
 	 */
 	private static final long serialVersionUID = 1L;
 	int[][][] grille = new int[100][100][3]; // grille contenant les couleurs
 	ArrayList<int[]> postionEnnemis = new ArrayList<int[]>();
 	ArrayList<int[]> postionFourmis = new ArrayList<int[]>();
+	/**
+	 * fonction définissant la taille de la grille et la couleur du fond
+	 */
 	public AffichageCase() {
 		setSize(1000, 1000);
 		setBackground(Color.blue);
 	}
 
 	@Override // la fonction marche avec un call repaint()
+	/**
+	 * fonction affichant les ennemis en rouge et les fourmis en noir
+	 * @param g dessin pour les insectes
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D dessin = (Graphics2D) g;
@@ -44,6 +51,11 @@ public class AffichageCase extends JPanel {
 			dessin.fill(new Ellipse2D.Double(xy[0]*10, xy[1]*10, 10, 10));
 		}
 	}
+	/**
+	 * fonction utilisée pour faire des tests sur l'affichage graphique à l'aide d'une fonction random
+	 * pour tester les différentes teintes de couleur 
+	 * @param c les cases de la grille
+	 */
 
 	public void setGrilleR(Case[][] c) {
 		int Max = 240;
@@ -64,6 +76,12 @@ public class AffichageCase extends JPanel {
 		this.postionEnnemis.add(new int[] {0,20});
 		this.postionFourmis.add(new int[] {15,70});
 	}
+	
+	/**
+	 * fonction fixant une valeur maximale pour la nourriture et les phéromones afin de créer une échelle de teintes
+	 * elle récupère la position des insectes et fixe les couleurs pour les cases occupées par des phéromones ou de la nourriture
+	 * @param cases les cases de la grille
+	 */
 	public void setGrille(Case[][] cases) {
 		this.postionEnnemis.clear();
 		this.postionFourmis.clear();

@@ -115,7 +115,7 @@ public class Colonie {
 	 */
 
 	public void consommation() {
-		this.stockNourriture -= (int) this.membres.size()/2;
+		this.stockNourriture -= (int) this.membres.size()/10;
 		while (this.stockNourriture < 0) {
 			this.famine();
 			this.stockNourriture += 1;

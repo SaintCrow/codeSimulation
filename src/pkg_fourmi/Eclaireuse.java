@@ -14,6 +14,18 @@ public class Eclaireuse extends Fourmi{
 		this.retour = false;
 		this.chemin = new ArrayList<Coordonnee>();
 	}
+	
+	@Override
+	public void deplacement(Coordonnee c) {
+		if (c.estCorrecte()) {
+			Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].setInsecte(null);
+			this.setPosition(c);
+			Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].setInsecte(this);
+			if (this.getRetour() == false){
+				this.getChemin().add(c);
+			}
+		}
+	}
 
 	public boolean getRetour() {
 		return retour;

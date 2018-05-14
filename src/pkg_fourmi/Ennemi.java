@@ -36,7 +36,7 @@ public class Ennemi extends Insecte{
 		int x = coordEnnemi.getX();
 		int y = coordEnnemi.getY();
 		ArrayList<Coordonnee> listFourmi = new ArrayList<Coordonnee>();
-		System.out.println("Fourmis détectées : ");
+		System.out.println("Fourmis dï¿½tectï¿½es : ");
 		for (int i = x-getChampvision(); i <= x + this.getChampvision(); i++){
 			for (int j = y-getChampvision(); j <= y + this.getChampvision(); j++){
 				if ((new Coordonnee(i,j).estCorrecte())&&(Simulation.getGrille()[i][j].getInsecte() instanceof Fourmi)){
@@ -71,6 +71,12 @@ public class Ennemi extends Insecte{
 	public String toString(){
 		String s = "Ennemi " + this.getPrenom() + " " + this.getNom();
 		return s;
+	}
+	@Override
+	public void mourir() {
+		super.mourir();
+		Simulation.getListEnnemi().remove(this);
+		Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].addNourriture(20);
 	}
 
 }

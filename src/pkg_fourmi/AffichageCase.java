@@ -11,6 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class AffichageCase extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int[][][] grille = new int[100][100][3]; // grille contenant les couleurs
 	ArrayList<int[]> postionEnnemis = new ArrayList<int[]>();
 	ArrayList<int[]> postionFourmis = new ArrayList<int[]>();

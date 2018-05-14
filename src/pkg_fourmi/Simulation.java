@@ -76,8 +76,19 @@ public class Simulation {
 		return grille;
 	}
 
-	public void apparitionEnnemi() {
-
+	public static void apparitionEnnemi() {
+		int x = (int) Math.random()*Simulation.largeur;
+		int y = (int) Math.random()*Simulation.hauteur;
+		Coordonnee c = new Coordonnee(x,y);
+		Coordonnee centre = new Coordonnee(50,50);
+		while(c.euclidienne(centre)<60 && Simulation.getGrille()[x][y].getInsecte()!=null){
+			x = (int) Math.random()*Simulation.largeur;
+			y = (int) Math.random()*Simulation.hauteur;
+			c = new Coordonnee(x,y);
+			
+		}
+		Ennemi mechant = new Ennemi(c);
+		Simulation.ajouterEnnemi(mechant);
 	}
 	
 	public static void ajouterEnnemi(Ennemi ennemi) {
@@ -141,6 +152,10 @@ public class Simulation {
 			}
 			
 			colonie.consommation();
+			
+			if(Math.random()>0.9d){
+				Simulation.apparitionEnnemi();
+			}
 			
 			System.out.println("   - Stock de nourriture : "+colonie.getStockNourriture());
 			System.out.println("   - Nombre de fourmis : "+colonie.getMembres().size());

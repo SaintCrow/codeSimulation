@@ -62,7 +62,7 @@ public class AffichageCase extends JPanel {
 	}
 	
 	/**
-	 * fonction utilisee pour faire des tests sur l'affichage graphique � l'aide d'une fonction random
+	 * fonction utilisee pour faire des tests sur l'affichage graphique a l'aide d'une fonction random
 	 * pour tester les differentes teintes de couleur 
 	 * @param c les cases de la grille
 	 */

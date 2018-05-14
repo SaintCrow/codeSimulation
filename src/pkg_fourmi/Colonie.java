@@ -60,11 +60,6 @@ public class Colonie {
 	
 	/**
 	 * set du stock de nourriture
-=======
-	/**5
-	 * getter x
->>>>>>> abf6ad8946cc3e919cfe98b2c0367af59565bd92
-	 * 
 	 * @param StockNourriture
 	 */
 
@@ -83,7 +78,7 @@ public class Colonie {
 	}
 	
 	/**
-	 * fonction ajoutant des fourmis � la colonie
+	 * fonction ajoutant des fourmis a la colonie
 	 * @param fourmi
 	 */
 
@@ -104,8 +99,8 @@ public class Colonie {
 	}
 	
 	/**
-	 * fonction g�rant les famines:
-	 * elle �limine al�atoirement un membre de la colonie en cas de p�nurie de nourriture
+	 * fonction gerant les famines:
+	 * elle elimine aleatoirement un membre de la colonie en cas de penurie de nourriture
 	 */
 
 	public void famine() {
@@ -114,9 +109,9 @@ public class Colonie {
 	}
 	
 	/**
-	 * fonction g�rant la consommation de nourriture par les fourmis
-	 * chaque membre consomme une unit� de nourriture
-	 * si le stock atteint z�ro, la famine est d�clench�e
+	 * fonction gerant la consommation de nourriture par les fourmis
+	 * chaque membre consomme une unite de nourriture
+	 * si le stock atteint zero, la famine est declenchee
 	 */
 
 	public void consommation() {

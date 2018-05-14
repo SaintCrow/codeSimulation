@@ -10,7 +10,7 @@ public class Case {
 	
 	/**
 	 * constructeur de case 
-	 * ( la case au début ne contient pas de pheromones)
+	 * ( la case au debut ne contient pas de pheromones)
 	 * @param pos position de la case
 	 * @param ins insecte sur la case (null si vide)
 	 * @param nour quantite de nourriture

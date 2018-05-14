@@ -19,7 +19,7 @@ public class AffichageCase extends JPanel {
 	ArrayList<int[]> postionEnnemis = new ArrayList<int[]>();
 	ArrayList<int[]> postionFourmis = new ArrayList<int[]>();
 	/**
-	 * fonction définissant la taille de la grille et la couleur du fond
+	 * fonction dï¿½finissant la taille de la grille et la couleur du fond
 	 */
 	public AffichageCase() {
 		setSize(1000, 1000);
@@ -52,8 +52,8 @@ public class AffichageCase extends JPanel {
 		}
 	}
 	/**
-	 * fonction utilisée pour faire des tests sur l'affichage graphique à l'aide d'une fonction random
-	 * pour tester les différentes teintes de couleur 
+	 * fonction utilisï¿½e pour faire des tests sur l'affichage graphique ï¿½ l'aide d'une fonction random
+	 * pour tester les diffï¿½rentes teintes de couleur 
 	 * @param c les cases de la grille
 	 */
 
@@ -78,8 +78,8 @@ public class AffichageCase extends JPanel {
 	}
 	
 	/**
-	 * fonction fixant une valeur maximale pour la nourriture et les phéromones afin de créer une échelle de teintes
-	 * elle récupère la position des insectes et fixe les couleurs pour les cases occupées par des phéromones ou de la nourriture
+	 * fonction fixant une valeur maximale pour la nourriture et les phï¿½romones afin de crï¿½er une ï¿½chelle de teintes
+	 * elle rï¿½cupï¿½re la position des insectes et fixe les couleurs pour les cases occupï¿½es par des phï¿½romones ou de la nourriture
 	 * @param cases les cases de la grille
 	 */
 	public void setGrille(Case[][] cases) {
@@ -108,9 +108,19 @@ public class AffichageCase extends JPanel {
 				float nourriture = (float)(c.getNourriture());
 				float pheroD = (float)(c.getPheroDanger());
 				float pheroN = (float)(c.getPheroNourriture());
-				this.grille[x][y][1] = (int) (100 + 150*(nourriture/valeurMaxNouriture));
-				this.grille[x][y][0] = (int) (100 + 150*(pheroD/valeurMaxPherDanger));
-				this.grille[x][y][2] = (int) (100 + 150*(pheroN/valeurMaxPherNouriture));
+				int typeTerritoire;
+				if (c.getType() == TypeCase.Fourmiliere){
+					typeTerritoire = 0;
+				}
+				else if(c.getType() == TypeCase.Territoire){
+					typeTerritoire = 1;
+				}
+				else{
+					typeTerritoire = 2;
+				}
+				this.grille[x][y][1] = (int) (100+typeTerritoire*33 + 150*(nourriture/valeurMaxNouriture));
+				this.grille[x][y][0] = (int) (100+typeTerritoire*33 + 150*(pheroD/valeurMaxPherDanger));
+				this.grille[x][y][2] = (int) (100+typeTerritoire*33 + 150*(pheroN/valeurMaxPherNouriture));
 				for(int i=0;i<3;i++){
 					if(this.grille[x][y][i]>255){
 						this.grille[x][y][i]=255;

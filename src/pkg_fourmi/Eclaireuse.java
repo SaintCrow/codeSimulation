@@ -7,7 +7,7 @@ import java.util.List;
 public class Eclaireuse extends Fourmi{
 	
 	private boolean retour;
-	private ArrayList<Coordonnee> chemin;
+	protected ArrayList<Coordonnee> chemin;
 
 	public Eclaireuse(Coordonnee position, Colonie colonie) {
 		super(position, 1, 1, colonie);

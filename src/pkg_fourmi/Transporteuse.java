@@ -36,12 +36,28 @@ public class Transporteuse  extends Eclaireuse{
 		System.out.println(this.toString()+" a rapport� de la nourriture � la fourmili�re.");
 	}
 	
+	public Coordonnee suivrePheromone(){
+		
+		for(int i = 0;i<this.getChampvision();i++){
+			for(int j = 0; j<this.getChampvision();j++){
+				if(Simulation.getGrille()[i][j].getPheroNourriture()>0 && this.chemin.contains(Simulation.getGrille()[i][j].getPosition())){
+					if(Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].getPheroNourriture()==0 || Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].getPheroNourriture()-Simulation.getGrille()[i][j].getPheroNourriture()==-1 || Math.abs(Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].getPheroNourriture()-Simulation.getGrille()[i][j].getPheroNourriture())<=19 )
+					return Simulation.getGrille()[i][j].getPosition();
+				}
+			}
+		}
+		return null;
+		
+	}
+	
 	public void action(){
 		
 		Coordonnee coordEnnemi = this.rechercheEnnemi();
 		Coordonnee coordNourriture = this.rechercheNourriture();
 		Coordonnee coordPheroDanger = this.recherchePheromoneDanger();
 		Coordonnee coordFourmi = this.getPosition();
+		Coordonnee pisteNourr = suivrePheromone();
+
 		int x = coordFourmi.getX();
 		int y = coordFourmi.getY();
 		
@@ -89,7 +105,9 @@ public class Transporteuse  extends Eclaireuse{
 				this.deplacement(position);
 			}
 		}
-		
+		else if(pisteNourr != null){
+			this.deplacement(allerA(pisteNourr));
+		}
 		else {
 			Coordonnee position = allerAleatoire();
 			this.deplacement(position);

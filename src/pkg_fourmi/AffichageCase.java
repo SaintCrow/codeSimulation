@@ -55,9 +55,14 @@ public class AffichageCase extends JPanel {
 		for(int[] xy:this.postionFourmis){
 			dessin.fill(new Ellipse2D.Double(xy[0]*10, xy[1]*10, 10, 10));
 		}
+		
 		dessin.setPaint(Color.blue);
 		for(int[] xy:this.postionEclaireuse){
-			dessin.fill(new Ellipse2D.Double(xy[0]*10+2, xy[1]*10+2, 8,8));
+			dessin.fill(new Ellipse2D.Double(xy[0]*10+2, xy[1]*10+2, 5, 5));
+		}
+		dessin.setPaint(Color.green);
+		for(int[] xy:this.postionTransporteuse){
+			dessin.fill(new Ellipse2D.Double(xy[0]*10+2, xy[1]*10+2, 5, 5));
 		}
 	}
 	

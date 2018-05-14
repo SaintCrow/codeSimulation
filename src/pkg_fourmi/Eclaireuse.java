@@ -125,7 +125,7 @@ public class Eclaireuse extends Fourmi{
 		else{
 			Coordonnee coordPlusProche = listNourriture.get(0);
 			for (int i = 1; i < listNourriture.size(); i++){
-				if (coordFourmi.distance(listNourriture.get(i)) > coordFourmi.distance(coordPlusProche)){
+				if (coordFourmi.distance(listNourriture.get(i)) < coordFourmi.distance(coordPlusProche)){
 					coordPlusProche = listNourriture.get(i);
 				}
 			}

@@ -93,18 +93,18 @@ public class Simulation {
 		//Saisi des parametres de la simulation :
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Hauteur de la carte ?");
-		int haut = scan.nextInt();
+		int haut = 100;
 		System.out.println("Largeur de la carte ?");
-		int larg = scan.nextInt();
+		int larg = 100;
 		System.out.println("Nombre de points de nourriture ?");
-		int nourMap = scan.nextInt();
+		int nourMap = 100;
 		System.out.println("Quantite de nourriture de la colonie ?");
-		int nourColonie = scan.nextInt();
+		int nourColonie =100;
 		scan.close();
 		
 		//Initialisation de la carte :
 		initialisation(0, 0, 0, haut, larg, nourMap, nourColonie);
-		
+		grille[10][10].addNourriture(50);
 		//Initialisation de l'affichage :
 		JFrame fenetre = new JFrame();
 		AffichageCase cases = new AffichageCase();

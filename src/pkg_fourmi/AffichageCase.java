@@ -107,6 +107,8 @@ public class AffichageCase extends JPanel {
 		
 		for(Case[] colones: cases){
 			for(Case c: colones){
+				x=c.getPosition().getX();
+				y=c.getPosition().getY();
 				if(c.getInsecte()!=null){
 					if(c.getInsecte() instanceof Fourmi){
 						this.postionFourmis.add(new int[] {x,y});
@@ -121,8 +123,8 @@ public class AffichageCase extends JPanel {
 						this.postionEnnemis.add(new int[] {x,y});
 					}
 				}
-				x=c.getPosition().getX();
-				y=c.getPosition().getY();
+				//x=c.getPosition().getX();
+				//y=c.getPosition().getY();
 				float nourriture = (float)(c.getNourriture());
 				float pheroD = (float)(c.getPheroDanger());
 				float pheroN = (float)(c.getPheroNourriture());

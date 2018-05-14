@@ -94,7 +94,7 @@ public class Simulation {
 					grille[i][j].addPheroNourriture(-1);
 				}
 				if (grille[i][j].getPheroDanger() != 0){
-					grille[i][j].addPheroDanger(-4);
+					grille[i][j].addPheroDanger(Math.max(-4,-grille[i][j].getPheroDanger()));
 				}
 			}
 		}

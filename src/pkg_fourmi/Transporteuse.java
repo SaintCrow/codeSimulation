@@ -40,7 +40,7 @@ public class Transporteuse extends Eclaireuse {
 
 		for (int i = 0; i < this.getChampvision(); i++) {
 			for (int j = 0; j < this.getChampvision(); j++) {
-				if (Simulation.getGrille()[i][j].getPheroNourriture() > 0 && this.chemin.contains(Simulation.getGrille()[i][j].getPosition())) {
+				if (Simulation.getGrille()[i][j].getPheroNourriture() > 0 && this.getChemin().contains(Simulation.getGrille()[i][j].getPosition())) {
 					if (Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].getPheroNourriture() == 0 || Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].getPheroNourriture() - Simulation.getGrille()[i][j].getPheroNourriture() == -1 || Math.abs(Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].getPheroNourriture() - Simulation.getGrille()[i][j].getPheroNourriture()) <= 19){
 						return Simulation.getGrille()[i][j].getPosition();
 					}

@@ -58,7 +58,6 @@ public class Colonie {
 		return stockNourriture;
 	}
 	
-<<<<<<< HEAD
 	/**
 	 * set du stock de nourriture
 =======
@@ -84,7 +83,7 @@ public class Colonie {
 	}
 	
 	/**
-	 * fonction ajoutant des fourmis à la colonie
+	 * fonction ajoutant des fourmis ï¿½ la colonie
 	 * @param fourmi
 	 */
 
@@ -105,8 +104,8 @@ public class Colonie {
 	}
 	
 	/**
-	 * fonction gérant les famines:
-	 * elle élimine aléatoirement un membre de la colonie en cas de pénurie de nourriture
+	 * fonction gï¿½rant les famines:
+	 * elle ï¿½limine alï¿½atoirement un membre de la colonie en cas de pï¿½nurie de nourriture
 	 */
 
 	public void famine() {
@@ -115,13 +114,13 @@ public class Colonie {
 	}
 	
 	/**
-	 * fonction gérant la consommation de nourriture par les fourmis
-	 * chaque membre consomme une unité de nourriture
-	 * si le stock atteint zéro, la famine est déclenchée
+	 * fonction gï¿½rant la consommation de nourriture par les fourmis
+	 * chaque membre consomme une unitï¿½ de nourriture
+	 * si le stock atteint zï¿½ro, la famine est dï¿½clenchï¿½e
 	 */
 
 	public void consommation() {
-		this.stockNourriture -= this.membres.size();
+		this.stockNourriture -= (int) this.membres.size()/2;
 		while (this.stockNourriture < 0) {
 			this.famine();
 			this.stockNourriture += 1;

@@ -110,7 +110,7 @@ public class Colonie {
 	 * @return x
 	 */
 
-	private void famine() {
+	public void famine() {
 		Fourmi sacrifice = this.membres.get((int) (1 + (this.membres.size() - 1) * Math.random()));
 		sacrifice.mourir();
 	}
@@ -121,7 +121,7 @@ public class Colonie {
 	 * @return x
 	 */
 
-	private void consommation() {
+	public void consommation() {
 		this.stockNourriture -= this.membres.size();
 		while (this.stockNourriture < 0) {
 			this.famine();

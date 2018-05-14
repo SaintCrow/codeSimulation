@@ -86,6 +86,19 @@ public class Simulation {
 		int y = ennemi.getPosition().getY();
 		Simulation.getGrille()[x][y].setInsecte(ennemi);
 	}
+	
+	public void updatePheromonone(){
+		for (int i = 0; i < largeur; i++){
+			for (int j = 0; j < hauteur; j++){
+				if (grille[i][j].getPheroNourriture() > 0){
+					grille[i][j].addPheroNourriture(-1);
+				}
+				if (grille[i][j].getPheroDanger() != 0){
+					grille[i][j].addPheroDanger(-4);
+				}
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		
@@ -126,6 +139,9 @@ public class Simulation {
 			for (Fourmi fourmi : colonie.getMembres()) {
 				fourmi.action();
 			}
+			
+			colonie.consommation();
+			
 			System.out.println("   - Stock de nourriture : "+colonie.getStockNourriture());
 			System.out.println("   - Nombre de fourmis : "+colonie.getMembres().size());
 			System.out.println("   - Nombres d'ennemis : "+Simulation.getListEnnemi().size());

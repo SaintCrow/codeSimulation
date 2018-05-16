@@ -2,12 +2,17 @@ package pkg_fourmi;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -67,8 +72,18 @@ public class AffichageCase extends JPanel {
 		for(int[] xy:this.postionTransporteuse){
 			dessin.fill(new Ellipse2D.Double(xy[0]*10+2, xy[1]*10+2, 5, 5));
 		}
-		FontRenderContext frc = dessin.getFontRenderContext(); //contains measurement _info
+		dessin.setPaint(Color.white);
+		InputStream is = AffichageCase.class.getResourceAsStream("/Minecraft.ttf");
 		Font f = new Font("Helvetica",Font.BOLD, 24);
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		
+		try {
+			f = new Font("Minecraft",Font.BOLD, 24);
+		} catch (Error e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		FontRenderContext frc = dessin.getFontRenderContext(); //contains measurement _info
 		String s = new String("tour "+Simulation.getTour());
 		TextLayout textlayout = new TextLayout(s, f, frc);
 		textlayout.draw(dessin, 10,30);  //use TextLayout's draw method

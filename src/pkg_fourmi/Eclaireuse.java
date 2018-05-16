@@ -176,6 +176,7 @@ public class Eclaireuse extends Fourmi{
 		}
 	}
 	
+
 	@Override
 	public String toString(){
 		String s = "Eclaireuse " + this.getPrenom() + " " + this.getNom();

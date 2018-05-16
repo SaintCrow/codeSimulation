@@ -66,6 +66,10 @@ public class Simulation {
 		for (int i = 0; i < nourMap; i++){
 			int x = rd.nextInt(largeur);
 			int y = rd.nextInt(hauteur);
+			while (new Coordonnee(x,y).distance(centre) < 9){
+				x = rd.nextInt(largeur);
+				y = rd.nextInt(hauteur);
+			}
 			grille[x][y].addNourriture(50);
 		}
 		

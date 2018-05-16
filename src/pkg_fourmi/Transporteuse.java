@@ -1,7 +1,5 @@
 package pkg_fourmi;
 
-import java.util.List;
-
 public class Transporteuse extends Eclaireuse {
 
 	private int nourriture;

@@ -2,8 +2,6 @@ package pkg_fourmi;
 
 import java.util.ArrayList;
 
-import java.util.List;
-
 public class Eclaireuse extends Fourmi{
 	
 	private boolean retour;
@@ -100,7 +98,7 @@ public class Eclaireuse extends Fourmi{
 		Coordonnee coordFourmi = this.getPosition();
 		int x = coordFourmi.getX();
 		int y = coordFourmi.getY();
-		Simulation.getGrille()[x][y].addPheroNourriture(20);
+		Simulation.getGrille()[x][y].addPheroNourriture(30);
 	}
 		
 	public Coordonnee rechercheNourriture(){
@@ -132,6 +130,45 @@ public class Eclaireuse extends Fourmi{
 			return coordPlusProche;		
 		}
 
+	}
+	
+	@Override
+	public Coordonnee allerAleatoire() {
+		int insecteX = this.getPosition().getX();
+		int insecteY = this.getPosition().getY();
+		ArrayList<Coordonnee> posiPossible = new ArrayList<Coordonnee>();
+		posiPossible.add(new Coordonnee(insecteX + 1, insecteY));
+		posiPossible.add(new Coordonnee(insecteX - 1, insecteY));
+		posiPossible.add(new Coordonnee(insecteX, insecteY + 1));
+		posiPossible.add(new Coordonnee(insecteX, insecteY - 1));
+		ArrayList<Coordonnee> listPosition1 = new ArrayList<Coordonnee>();
+		
+		for (Coordonnee posi : posiPossible) {
+			Case c = Simulation.getGrille()[posi.getX()][posi.getY()];
+			if (posi.estCorrecte() && c.getInsecte() == null) {
+				listPosition1.add(posi);
+			}
+			posiPossible = listPosition1;
+		}
+		
+		ArrayList<Coordonnee> listPosition2 = new ArrayList<Coordonnee>();
+
+		if (this.getChemin().size() > 1){
+			Coordonnee derCase = this.getChemin().get(this.getChemin().size()-2);
+			for (Coordonnee posi : posiPossible) {
+				if (derCase.getX() != posi.getX() || derCase.getY() != posi.getY()) {
+					listPosition2.add(posi);
+				}
+				posiPossible = listPosition2;
+			}
+		}
+
+		if (posiPossible.size() != 0) {
+			int indice = (int) (Math.random() * posiPossible.size());
+			return posiPossible.get(indice);
+		} else {
+			return this.getPosition();
+		}
 	}
 	
 	@Override

@@ -139,22 +139,11 @@ public abstract class Insecte {
 		posiPossible.add(new Coordonnee(insecteX - 1, insecteY));
 		posiPossible.add(new Coordonnee(insecteX, insecteY + 1));
 		posiPossible.add(new Coordonnee(insecteX, insecteY - 1));
-		if (this instanceof Soldate) {
-			ArrayList<Coordonnee> listPosition = new ArrayList<Coordonnee>();
-			for (Coordonnee position : posiPossible) {
-				if ((position.estCorrecte())
-						&& (Simulation.getGrille()[position.getX()][position.getY()].getType() != TypeCase.Badlands)) {
-					listPosition.add(position);
-				}
-				posiPossible = listPosition;
-			}
-		}
 
 		ArrayList<Coordonnee> listPosition = new ArrayList<Coordonnee>();
 
 		for (Coordonnee position : posiPossible) {
-			if ((position.estCorrecte())
-					&& (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null)) {
+			if (position.estCorrecte() && (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null)) {
 				listPosition.add(position);
 			}
 		}

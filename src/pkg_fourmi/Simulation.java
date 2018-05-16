@@ -14,7 +14,16 @@ public class Simulation {
 	private static int hauteur;
 	private static int largeur;
 	private static int nbr_tour = 1;
+	private static boolean continuer = true;
 	private static List<Ennemi> listEnnemi = new ArrayList<Ennemi>();
+
+	public static boolean isContinuer() {
+		return continuer;
+	}
+
+	public static void setContinuer(boolean continuer) {
+		Simulation.continuer = continuer;
+	}
 
 	public static Colonie getColonie() {
 		return colonie;
@@ -158,8 +167,10 @@ public class Simulation {
 		long time = System.currentTimeMillis();
 
 		
-		while (colonie.getMembres().size()>0 && colonie.getMembres().get(0) instanceof Reine) {
-			
+		while (isContinuer()) {
+			if(!(colonie.getMembres().size()>0 && colonie.getMembres().get(0) instanceof Reine)){
+				setContinuer(false);
+			}
 			System.out.println("Tour : "+Simulation.getTour());
 			for (Ennemi ennemi : listEnnemi) {
 				ennemi.action();

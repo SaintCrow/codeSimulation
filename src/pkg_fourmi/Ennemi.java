@@ -13,8 +13,6 @@ public class Ennemi extends Insecte {
 		Coordonnee coordFourmi = this.rechercheFourmi();
 
 		if (coordFourmi != null) {
-			System.out
-					.println("Position : " + this.getPosition().toString() + "   , Cible : " + coordFourmi.toString());
 			if (this.getPosition().distance(coordFourmi) == 1) {
 				this.attaquer(coordFourmi);
 			} else {

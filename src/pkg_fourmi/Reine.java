@@ -23,12 +23,22 @@ public class Reine extends Fourmi{
 	 * La ponte ne se produit que si le stock de nourriture est suffisant (valeur arbitraire de 50)
 	 */
 	
+	@Override
 	public void action(){
+		
+		Coordonnee coordEnnemi = this.rechercheEnnemi();
+		Coordonnee coordFourmi = this.getPosition();
+		int x = coordFourmi.getX();
+		int y = coordFourmi.getY();
 		
 		if (this.getColonie().getStockNourriture() > this.getColonie().getMembres().size()) {
 			this.pondre();
 		}
-		
+		if (coordEnnemi != null){
+			if (Simulation.getGrille()[x][y].getPheroDanger() == 0){
+				this.poserPheromoneDanger();
+			}
+		}
 	}
 	
 	/**
@@ -48,7 +58,7 @@ public class Reine extends Fourmi{
 		
 		if (rd.nextFloat() > 0.8) {
 			
-			int choixPonte = rd.nextInt(3);
+			int choixPonte = rd.nextInt(4);
 			Coordonnee position = this.allerAleatoire();
 			int stockNourriture = this.getColonie().getStockNourriture();
 			
@@ -59,14 +69,14 @@ public class Reine extends Fourmi{
 				System.out.println(fourmi.toString() + " est n�(e).");
 			}
 			
-			if (choixPonte == 1) {
+			else if (choixPonte == 1) {
 				Fourmi fourmi = new Eclaireuse(position, this.getColonie());
 				this.getColonie().ajouterFourmi(fourmi);
 				this.getColonie().setStockNourriture(stockNourriture-2);
 				System.out.println(fourmi.toString() + " est n�(e).");
 			}
 			
-			if (choixPonte == 2) {
+			else {
 				Fourmi fourmi = new Transporteuse(position, this.getColonie());
 				this.getColonie().ajouterFourmi(fourmi);
 				this.getColonie().setStockNourriture(stockNourriture-2);

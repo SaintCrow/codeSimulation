@@ -77,7 +77,7 @@ public class Ennemi extends Insecte {
 	public void mourir() {
 		super.mourir();
 		Simulation.getListEnnemi().remove(this);
-		Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].addNourriture(20);
+		Simulation.getGrille()[this.getPosition().getX()][this.getPosition().getY()].addNourriture(100);
 	}
 
 }

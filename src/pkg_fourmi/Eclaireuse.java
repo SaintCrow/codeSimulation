@@ -103,7 +103,7 @@ public class Eclaireuse extends Fourmi{
 		Coordonnee coordFourmi = this.getPosition();
 		int x = coordFourmi.getX();
 		int y = coordFourmi.getY();
-		Simulation.getGrille()[x][y].addPheroNourriture(30);
+		Simulation.getGrille()[x][y].addPheroNourriture(40);
 	}
 		
 	public Coordonnee rechercheNourriture(){

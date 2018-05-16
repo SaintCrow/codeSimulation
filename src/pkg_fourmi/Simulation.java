@@ -168,7 +168,10 @@ public class Simulation {
 				fourmi.action();
 			}
 			
-			colonie.consommation();
+			if (nbr_tour % 5 == 0){
+				colonie.consommation();
+			}
+			
 			updatePheromonone();
 			
 			if(Math.random()>0.9d && Simulation.listEnnemi.size()<15){

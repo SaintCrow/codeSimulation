@@ -77,17 +77,19 @@ public class Simulation {
 	}
 
 	public static void apparitionEnnemi() {
-		int x = (int) Math.random()*Simulation.largeur;
-		int y = (int) Math.random()*Simulation.hauteur;
+		Random rd = new Random();
+		int x = rd.nextInt(largeur);
+		int y = rd.nextInt(hauteur);
+		
 		Coordonnee c = new Coordonnee(x,y);
 		Coordonnee centre = new Coordonnee(50,50);
-		while(c.euclidienne(centre)<60 && Simulation.getGrille()[x][y].getInsecte()!=null){
-			x = (int) Math.random()*Simulation.largeur;
-			y = (int) Math.random()*Simulation.hauteur;
+		while(Simulation.grille[x][y].getType()!=TypeCase.Badlands && Simulation.getGrille()[x][y].getInsecte()!=null){
+			x = rd.nextInt(largeur);
+			y = rd.nextInt(hauteur);
 			c = new Coordonnee(x,y);
 			
 		}
-		Ennemi mechant = new Ennemi(new Coordonnee(30, 30));
+		Ennemi mechant = new Ennemi(c);
 		Simulation.ajouterEnnemi(mechant);
 	}
 	
@@ -139,9 +141,11 @@ public class Simulation {
 		//Debut de la simulation :
 		int nbr_tour = 1;
 		
+		//long time = System.currentTimeMillis();
 		long time = System.currentTimeMillis();
+
 		
-		while ((colonie.getMembres().get(0) instanceof Reine)&&(nbr_tour < 300)) {
+		while (colonie.getMembres().get(0) instanceof Reine) {
 			
 			System.out.println("Tour : "+nbr_tour);
 			for (Ennemi ennemi : listEnnemi) {
@@ -164,7 +168,7 @@ public class Simulation {
 			System.out.println("  ");
 			nbr_tour ++;
 			
-			while (System.currentTimeMillis() - time < 250){
+			while (System.currentTimeMillis() - time < 100){
 				
 			}
 			time = System.currentTimeMillis();

@@ -2,34 +2,34 @@ package pkg_fourmi;
 
 import java.util.ArrayList;
 
-public class Ennemi extends Insecte{
-	
+public class Ennemi extends Insecte {
+
 	public Ennemi(Coordonnee position) {
 		super(position, 3, 1);
 	}
-	
-	public void action(){
-		
+
+	public void action() {
+
 		Coordonnee coordFourmi = this.rechercheFourmi();
-		
-		if (coordFourmi != null){
-			System.out.println("Position : "+this.getPosition().toString()+"   , Cible : "+coordFourmi.toString());
-			if (this.getPosition().distance(coordFourmi) == 1){
+
+		if (coordFourmi != null) {
+			System.out
+					.println("Position : " + this.getPosition().toString() + "   , Cible : " + coordFourmi.toString());
+			if (this.getPosition().distance(coordFourmi) == 1) {
 				this.attaquer(coordFourmi);
-			}
-			else{
+			} else {
 				Coordonnee position = this.allerA(coordFourmi);
 				this.deplacement(position);
 			}
-			
+
 		}
-		
+
 		else {
 			Coordonnee position = allerAleatoire();
 			this.deplacement(position);
 		}
 	}
-	
+
 	public Coordonnee rechercheFourmi(){
 		
 		Coordonnee coordEnnemi = this.getPosition();
@@ -38,8 +38,10 @@ public class Ennemi extends Insecte{
 		ArrayList<Coordonnee> listFourmi = new ArrayList<Coordonnee>();
 		for (int i = x-getChampvision(); i <= x + this.getChampvision(); i++){
 			for (int j = y-getChampvision(); j <= y + this.getChampvision(); j++){
-				if ((new Coordonnee(i,j).estCorrecte())&&(Simulation.getGrille()[i][j].getInsecte() instanceof Fourmi)){					
+				if(new Coordonnee(i,j).estCorrecte()){
+				if (Simulation.getGrille()[i][j].getInsecte() instanceof Fourmi){					
 					listFourmi.add(Simulation.getGrille()[i][j].getPosition());
+					}
 				}
 			}
 		}
@@ -60,16 +62,17 @@ public class Ennemi extends Insecte{
 		}
 		
 	}
-	
+
 	public void tuerFourmi(Fourmi fourmi) {
 		fourmi.getColonie().getMembres().remove(fourmi);
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		String s = "Ennemi " + this.getPrenom() + " " + this.getNom();
 		return s;
 	}
+
 	@Override
 	public void mourir() {
 		super.mourir();

@@ -40,13 +40,13 @@ public class Coordonnee {
 		if (this.x < 0) {
 			return false;
 		}
-		else if (this.x > Simulation.getLargeur()) {
+		else if (this.x > Simulation.getLargeur()-1) {
 			return false;
 		}
 		else if (this.y < 0) {
 			return false;
 		}
-		else if (this.y > Simulation.getHauteur()) {
+		else if (this.y > Simulation.getHauteur()-1) {
 			return false;
 		}
 		else {

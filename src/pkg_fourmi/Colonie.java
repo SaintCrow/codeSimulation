@@ -1,6 +1,8 @@
 package pkg_fourmi;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Colonie {
@@ -104,7 +106,40 @@ public class Colonie {
 	 */
 
 	public void famine() {
-		Fourmi sacrifice = this.membres.get((int) (1 + (this.membres.size() - 1) * Math.random()));
+		ArrayList<Fourmi> listTransporteuse = new ArrayList<Fourmi>();
+		ArrayList<Fourmi> listEclaireuse = new ArrayList<Fourmi>();
+		ArrayList<Fourmi> listSoldate = new ArrayList<Fourmi>();
+		for (Fourmi fourmi : membres){
+			if (fourmi instanceof Transporteuse){
+				listTransporteuse.add(fourmi);
+			}
+			if (fourmi instanceof Eclaireuse){
+				listEclaireuse.add(fourmi);
+			}
+			if (fourmi instanceof Soldate){
+				listSoldate.add(fourmi);
+			}
+		}
+		
+		Random rd = new Random();
+		Fourmi sacrifice;
+		if (listEclaireuse.size() != 0 && listSoldate.size() != 0){
+			if (rd.nextInt(2) == 0){
+				sacrifice = listEclaireuse.get(rd.nextInt(listEclaireuse.size())); 
+			}
+			else{
+				sacrifice = listSoldate.get(rd.nextInt(listSoldate.size()));
+			}
+		}
+		else if (listEclaireuse.size() != 0){
+			sacrifice = listEclaireuse.get(rd.nextInt(listEclaireuse.size()));
+		}
+		else if (listSoldate.size() != 0){
+			sacrifice = listSoldate.get(rd.nextInt(listSoldate.size()));
+		}
+		else {
+			sacrifice = listTransporteuse.get(rd.nextInt(listTransporteuse.size()));
+		}
 		sacrifice.mourir();
 	}
 	

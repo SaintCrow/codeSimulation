@@ -87,7 +87,7 @@ public class Simulation {
 			c = new Coordonnee(x,y);
 			
 		}
-		Ennemi mechant = new Ennemi(c);
+		Ennemi mechant = new Ennemi(new Coordonnee(30, 30));
 		Simulation.ajouterEnnemi(mechant);
 	}
 	
@@ -98,7 +98,7 @@ public class Simulation {
 		Simulation.getGrille()[x][y].setInsecte(ennemi);
 	}
 	
-	public void updatePheromonone(){
+	public static void updatePheromonone(){
 		for (int i = 0; i < largeur; i++){
 			for (int j = 0; j < hauteur; j++){
 				if (grille[i][j].getPheroNourriture() > 0){
@@ -152,6 +152,7 @@ public class Simulation {
 			}
 			
 			colonie.consommation();
+			updatePheromonone();
 			
 			if(Math.random()>0.9d){
 				Simulation.apparitionEnnemi();

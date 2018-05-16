@@ -50,16 +50,17 @@ public abstract class Fourmi extends Insecte {
 		for (int i = x - 4; i <= x + 4; i++) {
 			for (int j = y - 4; j <= y + 4; j++) {
 				if (new Coordonnee(i, j).euclidienne(coordFourmi) <= 4) {
-					Simulation.getGrille()[x][y].addPheroDanger(5);
+					System.out.println("x :" + i +", y :" +j);
+					Simulation.getGrille()[i][j].addPheroDanger(10);
 				}
 				if (new Coordonnee(i, j).euclidienne(coordFourmi) <= 3) {
-					Simulation.getGrille()[x][y].addPheroDanger(5);
+					Simulation.getGrille()[i][j].addPheroDanger(10);
 				}
 				if (new Coordonnee(i, j).euclidienne(coordFourmi) <= 2) {
-					Simulation.getGrille()[x][y].addPheroDanger(5);
+					Simulation.getGrille()[i][j].addPheroDanger(10);
 				}
 				if (new Coordonnee(i, j).euclidienne(coordFourmi) <= 1) {
-					Simulation.getGrille()[x][y].addPheroDanger(5);
+					Simulation.getGrille()[i][j].addPheroDanger(10);
 				}
 			}
 		}

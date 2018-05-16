@@ -76,14 +76,19 @@ public class Eclaireuse extends Fourmi{
 		}
 		
 		else if (coordNourriture != null){
-			this.setRetour(true);
-			if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
-				this.setRetour(false);
-				Coordonnee position = allerAleatoire();
+			if (this.getPosition().distance(coordNourriture) == 1) {
+				this.setRetour(true);
+				if (Simulation.getGrille()[x][y].getType() == TypeCase.Fourmiliere){
+					this.setRetour(false);
+					Coordonnee position = allerAleatoire();
+					this.deplacement(position);
+				}
+				else {
+					this.deplacement(this.getChemin().get(this.getChemin().size()-1));
+				}
+			} else {
+				Coordonnee position = this.allerA(coordNourriture);
 				this.deplacement(position);
-			}
-			else {
-				this.deplacement(this.getChemin().get(this.getChemin().size()-1));
 			}
 		}
 		

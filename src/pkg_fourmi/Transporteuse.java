@@ -101,10 +101,14 @@ public class Transporteuse extends Eclaireuse {
 			} else {
 				Coordonnee position = this.allerA(coordNourriture);
 				this.deplacement(position);
-			}
-		} else if (pisteNourr != null) {
+			}	
+		} 
+		
+		else if (pisteNourr != null) {
 			this.deplacement(allerA(pisteNourr));
-		} else {
+		}
+		
+		else {
 			Coordonnee position = allerAleatoire();
 			this.deplacement(position);
 		}

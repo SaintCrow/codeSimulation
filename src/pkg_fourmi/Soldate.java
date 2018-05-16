@@ -1,5 +1,7 @@
 package pkg_fourmi;
 
+import java.util.ArrayList;
+
 public class Soldate extends Fourmi{
 	
 	
@@ -52,6 +54,33 @@ public class Soldate extends Fourmi{
 	/**
 	 * Cette fonction toString nous permet de recuperer plus facilement le nom et le prenom de la soldate
 	 */
+	
+	@Override
+	public Coordonnee allerAleatoire() {
+		int insecteX = this.getPosition().getX();
+		int insecteY = this.getPosition().getY();
+		ArrayList<Coordonnee> posiPossible = new ArrayList<Coordonnee>();
+		posiPossible.add(new Coordonnee(insecteX + 1, insecteY));
+		posiPossible.add(new Coordonnee(insecteX - 1, insecteY));
+		posiPossible.add(new Coordonnee(insecteX, insecteY + 1));
+		posiPossible.add(new Coordonnee(insecteX, insecteY - 1));
+		ArrayList<Coordonnee> listPosition = new ArrayList<Coordonnee>();
+		
+		for (Coordonnee position : posiPossible) {
+			Case c = Simulation.getGrille()[position.getX()][position.getY()];
+			if (position.estCorrecte() && c.getType() != TypeCase.Badlands && c.getInsecte() == null) {
+				listPosition.add(position);
+			}
+			posiPossible = listPosition;
+		}
+
+		if (posiPossible.size() != 0) {
+			int indice = (int) (Math.random() * listPosition.size());
+			return listPosition.get(indice);
+		} else {
+			return this.getPosition();
+		}
+	}
 	
 	@Override
 	public String toString(){

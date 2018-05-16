@@ -130,8 +130,7 @@ public abstract class Insecte {
 		}
 		return this.position;
 	}
-
-	public Coordonnee allerAleatoire() {
+	public ArrayList<Coordonnee> caseVacantes(){
 		int insecteX = this.position.getX();
 		int insecteY = this.position.getY();
 		ArrayList<Coordonnee> posiPossible = new ArrayList<Coordonnee>();
@@ -147,6 +146,12 @@ public abstract class Insecte {
 				listPosition.add(position);
 			}
 		}
+		return listPosition;
+	}
+	public Coordonnee allerAleatoire() {
+		
+		ArrayList<Coordonnee> listPosition = this.caseVacantes();
+		
 		if (listPosition.size() != 0) {
 			int indice = (int) (Math.random() * listPosition.size());
 			return listPosition.get(indice);

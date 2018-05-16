@@ -186,10 +186,7 @@ public class Simulation {
 				Simulation.apparitionEnnemi();
 			}
 			
-			System.out.println("   - Stock de nourriture : "+colonie.getStockNourriture());
-			System.out.println("   - Nombre de fourmis : "+colonie.getMembres().size());
-			System.out.println("   - Nombres d'ennemis : "+Simulation.getListEnnemi().size());
-			System.out.println("  ");
+			
 			Simulation.tourPlusPlus();
 			
 			while (System.currentTimeMillis() - time < 100){

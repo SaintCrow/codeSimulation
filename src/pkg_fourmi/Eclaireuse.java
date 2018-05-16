@@ -53,7 +53,9 @@ public class Eclaireuse extends Fourmi {
 			if (Simulation.getGrille()[x][y].getPheroDanger() == 0) {
 				this.poserPheromoneDanger();
 			}
-			if (this.getPosition().distance(coordEnnemi) == 1) {
+
+			if (this.getPosition().distance(coordEnnemi) <= 1){
+
 				this.attaquer(coordEnnemi);
 			} else {
 				Coordonnee position = this.allerA(coordEnnemi);

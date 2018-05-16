@@ -94,7 +94,7 @@ public class Transporteuse extends Eclaireuse {
 		}
 
 		else if (coordNourriture != null) {
-			if (this.getPosition().distance(coordNourriture) == 1) {
+			if (this.getPosition().distance(coordNourriture) <= 1) {
 				this.recupererNourriture(coordNourriture);
 			} else {
 				Coordonnee position = this.allerA(coordNourriture);

@@ -113,7 +113,7 @@ public class Colonie {
 			if (fourmi instanceof Transporteuse){
 				listTransporteuse.add(fourmi);
 			}
-			if (fourmi instanceof Eclaireuse){
+			if (fourmi instanceof Eclaireuse && !(fourmi instanceof Transporteuse)){
 				listEclaireuse.add(fourmi);
 			}
 			if (fourmi instanceof Soldate){

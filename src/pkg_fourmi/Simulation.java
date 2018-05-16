@@ -16,7 +16,7 @@ public class Simulation {
 	private static int nbr_tour = 1;
 	private static List<Ennemi> listEnnemi = new ArrayList<Ennemi>();
 
-	public Colonie getColonie() {
+	public static Colonie getColonie() {
 		return colonie;
 	}
 

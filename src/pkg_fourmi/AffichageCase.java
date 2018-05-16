@@ -29,6 +29,7 @@ public class AffichageCase extends JPanel {
 	ArrayList<int[]> postionEclaireuse = new ArrayList<int[]>();
 	ArrayList<int[]> postionTransporteuse = new ArrayList<int[]>();
 	
+	private Font f;
 	
 	
 	/**
@@ -47,6 +48,13 @@ public class AffichageCase extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D dessin = (Graphics2D) g;
+		this.f = new Font("Helvetica",Font.BOLD, 24);
+		try {
+			f = new Font("Minecraft",Font.BOLD, 24);
+		} catch (Error e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 
 		for (int i = 0; i < 100; i++) {
 			for (int j = 0; j < 100; j++) {
@@ -73,20 +81,19 @@ public class AffichageCase extends JPanel {
 			dessin.fill(new Ellipse2D.Double(xy[0]*10+2, xy[1]*10+2, 5, 5));
 		}
 		dessin.setPaint(Color.white);
-		InputStream is = AffichageCase.class.getResourceAsStream("/Minecraft.ttf");
-		Font f = new Font("Helvetica",Font.BOLD, 24);
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		
-		try {
-			f = new Font("Minecraft",Font.BOLD, 24);
-		} catch (Error e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
 		FontRenderContext frc = dessin.getFontRenderContext(); //contains measurement _info
 		String s = new String("tour "+Simulation.getTour());
 		TextLayout textlayout = new TextLayout(s, f, frc);
 		textlayout.draw(dessin, 10,30);  //use TextLayout's draw method
+		s = new String("Stock de nourriture :"+Simulation.getColonie().getStockNourriture());
+		textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 15,54);
+		s = new String("Nombre de fourmis :"+Simulation.getColonie().getMembres().size());
+		textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 15,78);
+		s = new String("Nombre de d'ennemis :"+Simulation.getListEnnemi().size());
+		textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 15,102);
 	}
 	
 	/**

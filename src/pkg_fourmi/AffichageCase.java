@@ -39,7 +39,22 @@ public class AffichageCase extends JPanel {
 		setSize(1000, 1000);
 		setBackground(Color.blue);
 	}
-
+	public static void ecrire(Graphics2D dessin,Font f){
+		dessin.setPaint(Color.white);
+		FontRenderContext frc = dessin.getFontRenderContext(); //contains measurement _info
+		String s = new String("tour "+Simulation.getTour());
+		TextLayout textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 10,30);  //use TextLayout's draw method
+		s = new String("Stock de nourriture :"+Simulation.getColonie().getStockNourriture());
+		textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 15,47);
+		s = new String("Nombre de fourmis :"+Simulation.getColonie().getMembres().size());
+		textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 15,64);
+		s = new String("Nombre de d'ennemis :"+Simulation.getListEnnemi().size());
+		textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 15,81);		
+	}
 	/**
 	 * fonction affichant les ennemis en rouge et les fourmis en noir
 	 * @param g dessin pour les insectes
@@ -48,9 +63,9 @@ public class AffichageCase extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D dessin = (Graphics2D) g;
-		this.f = new Font("Helvetica",Font.BOLD, 24);
+		this.f = new Font("Helvetica",Font.BOLD, 17);
 		try {
-			f = new Font("Minecraft",Font.BOLD, 24);
+			f = new Font("Minecraft",Font.BOLD, 17);
 		} catch (Error e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,20 +95,17 @@ public class AffichageCase extends JPanel {
 		for(int[] xy:this.postionTransporteuse){
 			dessin.fill(new Ellipse2D.Double(xy[0]*10+2, xy[1]*10+2, 5, 5));
 		}
-		dessin.setPaint(Color.white);
-		FontRenderContext frc = dessin.getFontRenderContext(); //contains measurement _info
-		String s = new String("tour "+Simulation.getTour());
-		TextLayout textlayout = new TextLayout(s, f, frc);
-		textlayout.draw(dessin, 10,30);  //use TextLayout's draw method
-		s = new String("Stock de nourriture :"+Simulation.getColonie().getStockNourriture());
-		textlayout = new TextLayout(s, f, frc);
-		textlayout.draw(dessin, 15,54);
-		s = new String("Nombre de fourmis :"+Simulation.getColonie().getMembres().size());
-		textlayout = new TextLayout(s, f, frc);
-		textlayout.draw(dessin, 15,78);
-		s = new String("Nombre de d'ennemis :"+Simulation.getListEnnemi().size());
-		textlayout = new TextLayout(s, f, frc);
-		textlayout.draw(dessin, 15,102);
+		if(Simulation.isContinuer()){
+			ecrire(dessin,f);
+		}
+		else{
+			dessin.setPaint(Color.white);
+			Font f2 = new Font("Helvetica",Font.BOLD, 100);
+			FontRenderContext frc = dessin.getFontRenderContext();
+			String s = new String("PERDhUE");
+			TextLayout textlayout = new TextLayout(s, f2, frc);
+			textlayout.draw(dessin, 250,500);
+		}
 	}
 	
 	/**

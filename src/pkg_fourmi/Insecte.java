@@ -25,11 +25,11 @@ public abstract class Insecte {
 		this.endurance = endurance;
 		this.force = force;
 	}
-
+	
 	public Coordonnee getPosition() {
 		return position;
 	}
-
+	
 	public void setPosition(Coordonnee position) {
 		this.position = position;
 	}

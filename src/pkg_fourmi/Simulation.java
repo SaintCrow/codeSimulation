@@ -13,6 +13,7 @@ public class Simulation {
 	private static Case[][] grille;
 	private static int hauteur;
 	private static int largeur;
+	private static int nbr_tour = 1;
 	private static List<Ennemi> listEnnemi = new ArrayList<Ennemi>();
 
 	public Colonie getColonie() {
@@ -29,6 +30,14 @@ public class Simulation {
 	
 	public static List<Ennemi> getListEnnemi() {
 		return listEnnemi;
+	}
+
+	public static int getTour() {
+		return nbr_tour;
+	}
+
+	public static void tourPlusPlus() {
+		Simulation.nbr_tour += 1;
 	}
 
 	public static void initialisation(int nbTravailleuse, int nbEclaireuse, int nbSoldate, int haut, int larg, int nourMap, int nourColonie){
@@ -82,7 +91,7 @@ public class Simulation {
 		int y = rd.nextInt(hauteur);
 		
 		Coordonnee c = new Coordonnee(x,y);
-		Coordonnee centre = new Coordonnee(50,50);
+		
 		while(Simulation.grille[x][y].getType()!=TypeCase.Badlands && Simulation.getGrille()[x][y].getInsecte()!=null){
 			x = rd.nextInt(largeur);
 			y = rd.nextInt(hauteur);
@@ -139,7 +148,7 @@ public class Simulation {
 		fenetre.setVisible(true);
 		
 		//Debut de la simulation :
-		int nbr_tour = 1;
+		
 		
 		//long time = System.currentTimeMillis();
 		long time = System.currentTimeMillis();
@@ -147,7 +156,7 @@ public class Simulation {
 		
 		while (colonie.getMembres().size()>0 && colonie.getMembres().get(0) instanceof Reine) {
 			
-			System.out.println("Tour : "+nbr_tour);
+			System.out.println("Tour : "+Simulation.getTour());
 			for (Ennemi ennemi : listEnnemi) {
 				ennemi.action();
 			}
@@ -166,7 +175,7 @@ public class Simulation {
 			System.out.println("   - Nombre de fourmis : "+colonie.getMembres().size());
 			System.out.println("   - Nombres d'ennemis : "+Simulation.getListEnnemi().size());
 			System.out.println("  ");
-			nbr_tour ++;
+			Simulation.tourPlusPlus();
 			
 			while (System.currentTimeMillis() - time < 100){
 				

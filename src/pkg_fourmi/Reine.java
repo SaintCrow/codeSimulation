@@ -25,7 +25,7 @@ public class Reine extends Fourmi{
 	
 	public void action(){
 		
-		if (this.getColonie().getStockNourriture() > 50) {
+		if (this.getColonie().getStockNourriture() > this.getColonie().getMembres().size()) {
 			this.pondre();
 		}
 		
@@ -56,21 +56,21 @@ public class Reine extends Fourmi{
 				Fourmi fourmi = new Soldate(position, this.getColonie());
 				this.getColonie().ajouterFourmi(fourmi);
 				this.getColonie().setStockNourriture(stockNourriture-5);
-				System.out.println(fourmi.toString() + " est né(e).");
+				System.out.println(fourmi.toString() + " est nï¿½(e).");
 			}
 			
 			if (choixPonte == 1) {
 				Fourmi fourmi = new Eclaireuse(position, this.getColonie());
 				this.getColonie().ajouterFourmi(fourmi);
 				this.getColonie().setStockNourriture(stockNourriture-2);
-				System.out.println(fourmi.toString() + " est né(e).");
+				System.out.println(fourmi.toString() + " est nï¿½(e).");
 			}
 			
 			if (choixPonte == 2) {
 				Fourmi fourmi = new Transporteuse(position, this.getColonie());
 				this.getColonie().ajouterFourmi(fourmi);
 				this.getColonie().setStockNourriture(stockNourriture-2);
-				System.out.println(fourmi.toString() + " est né(e).");
+				System.out.println(fourmi.toString() + " est nï¿½(e).");
 			}
 			
 		}

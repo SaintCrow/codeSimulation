@@ -124,7 +124,7 @@ public class Simulation {
 		System.out.println("Nombre de points de nourriture ?");
 		int nourMap = 100;
 		System.out.println("Quantite de nourriture de la colonie ?");
-		int nourColonie =10000;
+		int nourColonie =100;
 		scan.close();
 		
 		//Initialisation de la carte :
@@ -145,7 +145,7 @@ public class Simulation {
 		long time = System.currentTimeMillis();
 
 		
-		while (colonie.getMembres().get(0) instanceof Reine) {
+		while (colonie.getMembres().size()>0 && colonie.getMembres().get(0) instanceof Reine) {
 			
 			System.out.println("Tour : "+nbr_tour);
 			for (Ennemi ennemi : listEnnemi) {
@@ -158,7 +158,7 @@ public class Simulation {
 			colonie.consommation();
 			updatePheromonone();
 			
-			if(Math.random()>0.9d){
+			if(Math.random()>0.9d && Simulation.listEnnemi.size()<15){
 				Simulation.apparitionEnnemi();
 			}
 			

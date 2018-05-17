@@ -122,7 +122,7 @@ public class AffichageCase extends JPanel {
 			FontRenderContext frc = dessin.getFontRenderContext();
 			String s = new String("PERDUE");
 			TextLayout textlayout = new TextLayout(s, f2, frc);
-			textlayout.draw(dessin, 250, 500);
+			textlayout.draw(dessin, 270, 500);
 		}
 	}
 

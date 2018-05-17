@@ -257,12 +257,13 @@ public class Eclaireuse extends Fourmi {
 		ArrayList<Coordonnee> listPosition1 = new ArrayList<Coordonnee>();
 
 		for (Coordonnee posi : posiPossible) {
+			if(posi.estCorrecte()){
 			Case c = Simulation.getGrille()[posi.getX()][posi.getY()];
-			if (posi.estCorrecte() && c.getInsecte() == null) {
+			if (c.getInsecte() == null) {
 				listPosition1.add(posi);
 			}
 			posiPossible = listPosition1;
-		}
+		}}
 
 		ArrayList<Coordonnee> listPosition2 = new ArrayList<Coordonnee>();
 

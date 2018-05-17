@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class Fourmi extends Insecte {
 
 	private Colonie colonie;
-	
+
 	/**
 	 * Constructeur
 	 * 
@@ -19,23 +19,24 @@ public abstract class Fourmi extends Insecte {
 		super(position, endurance, force);
 		this.colonie = colonie;
 	}
-	
+
 	/**
-	 *@getter
+	 * @getter
 	 *
-	 *@return colonie
+	 * @return colonie
 	 */
 
 	public Colonie getColonie() {
 		return colonie;
 	}
-	
+
 	/**
-	 * Cette fonction recherche les ennemis en parcourant la liste des ennemis pour trouver ceux dont les coordonnées 
-	 * sont dans le champ de vision de la fourmi et en les mettant dans une liste.
-	 * Ensuite, si la liste est vide, la fourmi ne trouve pas d'ennemis.
-	 *  Si la liste ne contient qu'un seul ennemi, la fourmi le trouve et si elle en contient plusieurs, elle recherche 
-	 *  le plus proche grâce à la fonction distance et le renvoie
+	 * Cette fonction recherche les ennemis en parcourant la liste des ennemis
+	 * pour trouver ceux dont les coordonnées sont dans le champ de vision de la
+	 * fourmi et en les mettant dans une liste. Ensuite, si la liste est vide,
+	 * la fourmi ne trouve pas d'ennemis. Si la liste ne contient qu'un seul
+	 * ennemi, la fourmi le trouve et si elle en contient plusieurs, elle
+	 * recherche le plus proche grâce à la fonction distance et le renvoie
 	 */
 
 	public Coordonnee rechercheEnnemi() {
@@ -65,44 +66,51 @@ public abstract class Fourmi extends Insecte {
 			return coordPlusProche;
 		}
 	}
-	
 
 	/**
-	 * Cette fonction permet à la fourmi de poser une phéromone de danger de forme circulaire autour d'elle
-	 * L'intensité décroit lorsqu'on s'écarte du centre du cercle
+	 * Cette fonction permet à la fourmi de poser une phéromone de danger de
+	 * forme circulaire autour d'elle L'intensité décroit lorsqu'on s'écarte du
+	 * centre du cercle
 	 * 
 	 */
 
 	public void poserPheromoneDanger() {
 		Coordonnee coordFourmi = this.getPosition();
+		Coordonnee c;
 		int x = coordFourmi.getX();
 		int y = coordFourmi.getY();
 		for (int i = x - 4; i <= x + 4; i++) {
 			for (int j = y - 4; j <= y + 4; j++) {
-				if (new Coordonnee(i, j).euclidienne(coordFourmi) <= 4) {
-					Simulation.getGrille()[i][j].addPheroDanger(10);
-				}
-				if (new Coordonnee(i, j).euclidienne(coordFourmi) <= 3) {
-					Simulation.getGrille()[i][j].addPheroDanger(10);
-				}
-				if (new Coordonnee(i, j).euclidienne(coordFourmi) <= 2) {
-					Simulation.getGrille()[i][j].addPheroDanger(10);
-				}
-				if (new Coordonnee(i, j).euclidienne(coordFourmi) <= 1) {
-					Simulation.getGrille()[i][j].addPheroDanger(10);
+				c = new Coordonnee(i, j);
+				if (c.estCorrecte()) {
+					if (c.euclidienne(coordFourmi) <= 4) {
+						Simulation.getGrille()[i][j].addPheroDanger(10);
+					}
+					if (c.euclidienne(coordFourmi) <= 3) {
+						Simulation.getGrille()[i][j].addPheroDanger(10);
+					}
+					if (c.euclidienne(coordFourmi) <= 2) {
+						Simulation.getGrille()[i][j].addPheroDanger(10);
+					}
+					if (c.euclidienne(coordFourmi) <= 1) {
+						Simulation.getGrille()[i][j].addPheroDanger(10);
+					}
 				}
 			}
 		}
 	}
-	
+
 	/**
-	 * Cette fonction permet de rechercher une pheromone de danger dans le champ de vision de la fourmi
+	 * Cette fonction permet de rechercher une pheromone de danger dans le champ
+	 * de vision de la fourmi
 	 * 
 	 * 
-	 *@return null si aucune phéromone de danger n'a ete trouvee 
-	 *@return listPheromone.get(0) dans le cas ou une seule phéromone de danger a été trouvée
-	 *@return coordPlusProche dans le cas ou plusieurs pheromones de danger ont ete detectees, on retourne alors
-	 *la pheromone la plus proche de la fourmi
+	 * @return null si aucune phéromone de danger n'a ete trouvee
+	 * @return listPheromone.get(0) dans le cas ou une seule phéromone de danger
+	 *         a été trouvée
+	 * @return coordPlusProche dans le cas ou plusieurs pheromones de danger ont
+	 *         ete detectees, on retourne alors la pheromone la plus proche de
+	 *         la fourmi
 	 */
 
 	public Coordonnee recherchePheromoneDanger() {
@@ -148,14 +156,14 @@ public abstract class Fourmi extends Insecte {
 		}
 
 	}
-	
 
 	/**
-	 *Cette fonction fonctionne de la meme maniere que les deux autres fonctions de recherche, mais sert a rechercher
-	 *les pheromones de nourriture
+	 * Cette fonction fonctionne de la meme maniere que les deux autres
+	 * fonctions de recherche, mais sert a rechercher les pheromones de
+	 * nourriture
 	 */
-	
-	public Coordonnee recherchePheromoneNourriture(){
+
+	public Coordonnee recherchePheromoneNourriture() {
 		Coordonnee coordFourmi = this.getPosition();
 		int x = coordFourmi.getX();
 		int y = coordFourmi.getY();
@@ -197,14 +205,15 @@ public abstract class Fourmi extends Insecte {
 			return coordPlusProche;
 		}
 	}
-	
+
 	/**
-	 * Cette fonction code la mort pour les fourmis en les effaçant de la liste des membres de la colonie.
+	 * Cette fonction code la mort pour les fourmis en les effaçant de la liste
+	 * des membres de la colonie.
 	 */
 
 	@Override
 	public void mourir() {
-		super.mourir(); 
+		super.mourir();
 		this.getColonie().getMembres().remove(this);
 
 	}

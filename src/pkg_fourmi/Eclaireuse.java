@@ -218,12 +218,13 @@ public class Eclaireuse extends Fourmi {
 	}
 	
 
-	/**
-	 * Cette fonction fait la liste des nouvelles positions possibles pour l'eclaireuse et en choisit une aleatoirement
-	 * parmi elles
-	 * On a egalement ajoute une fonctionnalite pour empecher la fourmi de parcourir une nouvelle fois les cases deja stockees
-	 * dans le chemin (liste des cases deja parcourues par la fourmi depuis la fourmiliere)
-	 */
+
+/**
+ * Cette fonction permet de balayer supprimer les portions du chemin en memoire qui comportent deux fois
+ * les memes coordonnees afin d'eviter les boucles et d'etre plus efficace lors du retour a la colonie de l'eclaireuse
+ * (fonction utilisee lorsque l'eclaireuse est dans l'etat retour)
+ * @return nChemin
+ */
 	
 	public ArrayList<Coordonnee> lisserChemin() {
 		ArrayList<Coordonnee> nChemin = new ArrayList<Coordonnee>();
@@ -244,6 +245,13 @@ public class Eclaireuse extends Fourmi {
 		}
 		return this.getChemin();
 	}
+	
+	/**
+	 * Cette fonction fait la liste des nouvelles positions possibles pour l'eclaireuse et en choisit une aleatoirement
+	 * parmi elles
+	 * On a egalement ajoute une fonctionnalite pour empecher la fourmi de parcourir une nouvelle fois les cases deja stockees
+	 * dans le chemin (liste des cases deja parcourues par la fourmi depuis la fourmiliere)
+	 */
 
 	@Override
 	public Coordonnee allerAleatoire() {

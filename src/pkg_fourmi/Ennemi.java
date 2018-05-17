@@ -15,6 +15,14 @@ public class Ennemi extends Insecte {
 	public Ennemi(Coordonnee position) {
 		super(position, 3, 1);
 	}
+	
+	/**
+	 *
+	 *Cette fonction code les ations de l'ennemi, c'est-a-dire rechercher des fourmis pour se diriger vers elles et les attaquer 
+	 *ou se deplacer aleatoirement si aucune fourmi n'est en vue
+	 * 
+	 * 
+	 */
 
 	public void action() {
 
@@ -35,6 +43,13 @@ public class Ennemi extends Insecte {
 			this.deplacement(position);
 		}
 	}
+	
+	/**
+	 * Cette fonction est celle qui permet a l'ennemi de rechercher des fourmis en prenant les coordonnees des cases dans le champ de vision de l'ennemi
+     * puis en verifiant s'il s'y trouve des fourmis
+     * S'il en trouve, la fonction renvoie les coordonnees de la fourmi la plus proche
+     * S'il n'en trouve pas, la fonction ne renvoie rien
+	 */
 
 	public Coordonnee rechercheFourmi(){
 		
@@ -68,16 +83,30 @@ public class Ennemi extends Insecte {
 		}
 		
 	}
+	
+	/**
+	 * Cette fonction permet a l'ennemi de tuer une fourmi en l'effacant de la liste des membres de la colonie
+	 */
 
 	public void tuerFourmi(Fourmi fourmi) {
 		fourmi.getColonie().getMembres().remove(fourmi);
 	}
+	
+
+	/**
+	 * Cette fonction nous permet de recuperer facilement le nom et le prenom des ennemis pour les identifier
+	 */
 
 	@Override
 	public String toString() {
 		String s = "Ennemi " + this.getPrenom() + " " + this.getNom();
 		return s;
 	}
+	
+	/**
+	 * Cette fonction code la mort des ennemis en les supprimant de la simulation (liste des ennemis)
+     * et en ajoutant de la nourriture dans la case precedemment occupee
+	 */
 
 	@Override
 	public void mourir() {

@@ -3,6 +3,14 @@ package pkg_fourmi;
 import java.util.ArrayList;
 
 public class Ennemi extends Insecte {
+	
+	
+
+	/**
+	 * constructeur
+	 * 
+	 * @param posisition
+	 */
 
 	public Ennemi(Coordonnee position) {
 		super(position, 3, 1);

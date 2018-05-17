@@ -16,38 +16,93 @@ public class Simulation {
 	private static int nbr_tour = 1;
 	private static boolean continuer = true;
 	private static List<Ennemi> listEnnemi = new ArrayList<Ennemi>();
+	
+	
 
 	public static boolean isContinuer() {
 		return continuer;
 	}
+	
+	
 
 	public static void setContinuer(boolean continuer) {
 		Simulation.continuer = continuer;
 	}
+	
+
+	/**
+	 * getter colonie
+	 * 
+	 * @return colonie
+	 */
 
 	public static Colonie getColonie() {
 		return colonie;
 	}
+	
+	/**
+	 *getter hauteur
+	 * 
+	 * @return hauteur
+	 */
 
 	public static int getHauteur() {
 		return hauteur;
 	}
+	
+	/**
+	 * get largeur
+	 * 
+	 * @return hauteur
+	 */
 
 	public static int getLargeur() {
 		return largeur;
 	}
 	
+	/**
+	 * get listEnnemi
+	 * 
+	 * @return listEnnemi
+	 */
+	
 	public static List<Ennemi> getListEnnemi() {
 		return listEnnemi;
 	}
+	
+
+	/**
+	 * get tour 
+	 * Cette fonction retourne le tour actuel de la simulation
+	 * @return tour
+	 */
+
 
 	public static int getTour() {
 		return nbr_tour;
 	}
+	
+
+	/**
+	 * Cette fonction ajoute 1 au nombre de tour de la simulation
+	 */
+
 
 	public static void tourPlusPlus() {
 		Simulation.nbr_tour += 1;
 	}
+	
+	/**
+	 * constructeur 
+	 * 
+	 * @param nbTravailleuse
+	 * @param nbEclaireuse 
+	 * @param nbSoldate 
+	 * @param haut 
+	 * @param larg
+	 * @param nourMap 
+	 * @param nourColonie 
+	 */
 
 	public static void initialisation(int nbTravailleuse, int nbEclaireuse, int nbSoldate, int nourMap, int nourColonie){
 		hauteur = 100;
@@ -91,9 +146,23 @@ public class Simulation {
 		
 	}
 	
+	/**
+	 * get grille 
+	 * 
+	 * @return grille
+	 */
+
+	
 	public static Case[][] getGrille(){
 		return grille;
 	}
+	
+
+	/**
+	 * Cette fonction fait apparaître des ennemis dans la simulation si le nouvel ennemi aux coordonnees aleatoires se situe dans la zone de danger et 
+	 * qu'aucun insecte ne se trouve deja a cette position
+	 * Cette fonction appelle ajouterEnnemi 
+	 */
 
 	public static void apparitionEnnemi() {
 		Random rd = new Random();
@@ -112,12 +181,24 @@ public class Simulation {
 		Simulation.ajouterEnnemi(mechant);
 	}
 	
+	/**
+	 * Cette fonction ajoute les nouveaux ennemis crees dans la fonction precedente a la simulation
+	 * en ajoutant l'ennemi sur la grille et dans la liste des ennemis
+	 */
+
+	
 	public static void ajouterEnnemi(Ennemi ennemi) {
 		Simulation.getListEnnemi().add(ennemi);
 		int x = ennemi.getPosition().getX();
 		int y = ennemi.getPosition().getY();
 		Simulation.getGrille()[x][y].setInsecte(ennemi);
 	}
+	
+
+	/**
+	 * Cette fonction fait en sorte que les pheromones disparaissent au cours du temps 
+	 * Les pheromones de danger decroissent de 4 a chaque tour et les pheromones de nourriture de 1 a chaque tour
+	 */
 	
 	public static void updatePheromonone(){
 		for (int i = 0; i < largeur; i++){
@@ -131,6 +212,17 @@ public class Simulation {
 			}
 		}
 	}
+	
+	/**
+	 *Cette fonction initialise tous les parametres de la simulation:
+	 *cases (longueur et largeur), insectes, quantité de nourriture de la colonie et quantité de nourriture dans les sources disseminees sur la carte
+	 *et fait en sorte que la simulation s'actualise a chaque tour 
+	 *(et actualise l'affichage graphique)
+	 *Cette fonction affiche aussi les informations de la colonie.
+	 *Elle fixe enfin le taux d'apparition des ennemis
+	 *
+	 */
+
 
 	public static void main(String[] args) {
 		

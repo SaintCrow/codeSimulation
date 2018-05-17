@@ -52,8 +52,12 @@ public class Soldate extends Fourmi{
 	}
 	
 	/**
-	 * Cette fonction toString nous permet de recuperer plus facilement le nom et le prenom de la soldate
+	 * Cette fonction choisit aleatoirement la destination de la fourmi parmi la liste des destinations
+	 * possibles (cases adjacentes)
+	 * Les soldates parcourent le territoire et ne s'aventurent pas dans la zone de danger en temps normal
 	 */
+	
+	
 	
 	@Override
 	public Coordonnee allerAleatoire() {
@@ -81,6 +85,13 @@ public class Soldate extends Fourmi{
 			return this.getPosition();
 		}
 	}
+	
+	
+	/**
+	 * Cette fonction toString nous permet de recuperer plus facilement le nom et le prenom de la soldate
+	 * 
+	 * @return s 
+	 */
 	
 	@Override
 	public String toString(){

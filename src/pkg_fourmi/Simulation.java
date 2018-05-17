@@ -21,13 +21,21 @@ public class Simulation {
 	private static AffichageCase casesGr = new AffichageCase();
 			
 	
-	
+	/**
+	 * getter continuer
+	 * Cette fonction permet de recuperer le booleen continuer qui permet de savoir si la simulation continue et de passer au tour suivant si c'est le cas
+	 * @return continuer
+	 */
 
 	public static boolean isContinuer() {
 		return continuer;
 	}
 	
-	
+	/**
+	 * set continuer
+	 * Cette fonction fait passer au tour suivant de simulation tant que continuer est vraie et l'arrête quand il devient faux
+	 * @param continuer
+	 */
 
 	public static void setContinuer(boolean continuer) {
 		Simulation.continuer = continuer;

@@ -11,6 +11,14 @@ public abstract class Insecte {
 	private int champvision;
 	private int endurance;
 	private int force;
+	
+	/**
+	 *correcteur 
+	 * 
+	 * @param position
+	 * @param endurance
+	 * @param force
+	 */
 
 	public Insecte(Coordonnee position, int endurance, int force) {
 		Random rd = new Random();
@@ -26,56 +34,132 @@ public abstract class Insecte {
 		this.force = force;
 	}
 	
+	/**
+	 *getter position
+	 * 
+	 *@return position
+	 */
+	
 	public Coordonnee getPosition() {
 		return position;
 	}
 	
+	/**
+	 *set position
+	 * 
+	 *@param position
+	 */
+	
 	public void setPosition(Coordonnee position) {
 		this.position = position;
 	}
+	
+	/**
+	 *getter nom
+	 * 
+	 *@return nom
+	 */
+
 
 	public Nom getNom() {
 		return nom;
 	}
+	
+
+	/**
+	 *set nom
+	 * 
+	 *@param nom
+	 */
 
 	public void setNom(Nom nom) {
 		this.nom = nom;
 	}
+	
+	/**
+	 *getter prenom
+	 * 
+	 *@return prenom
+	 */
 
 	public Prenom getPrenom() {
 		return prenom;
 	}
+	
+	/**
+	 *set prenom
+	 * 
+	 *@param prenom
+	 */
 
 	public void setPrenom(Prenom prenom) {
 		this.prenom = prenom;
 	}
+	
+	/**
+	 *getter champvision
+	 * 
+	 *@return champvision
+	 */
 
 	public int getChampvision() {
 		return champvision;
 	}
+	
+	/**
+	 *set champvision
+	 * 
+	 *@param champvision
+	 */
 
 	public void setChampvision(int champvision) {
 		this.champvision = champvision;
 	}
+	
+	/**
+	 *getter endurance
+	 * 
+	 *@return position
+	 */
 
 	public int getEndurance() {
 		return endurance;
 	}
+	
+
+	/**
+	 *set endurance
+	 * 
+	 *@param endurance
+	 */
+
 
 	public void setEndurance(int endurance) {
 		this.endurance = endurance;
 	}
+	
+	/**
+	 *getter force
+	 * 
+	 *@return force
+	 */
 
 	public int getForce() {
 		return force;
 	}
+	
+	/**
+	 *set force
+	 * 
+	 *@param force
+	 */
 
 	public void setForce(int force) {
 		this.force = force;
 	}
 
 	/**
-	 * deplace l'insecte( change sa coordonnee
+	 * deplace l'insecte c'est-a-dire change sa coordonnee
 	 * 
 	 * @param c
 	 */
@@ -86,6 +170,12 @@ public abstract class Insecte {
 			Simulation.getGrille()[this.position.getX()][this.position.getY()].setInsecte(this);
 		}
 	}
+	
+	/**
+	 *fonction d'attaque qui recupere la position de la cible et diminue son endurance de la valeur de la force de l'attaquant
+	 *Cette fonction renvoie egalment un message d'attaque et active la fonction de mort si l'endurance de l'insecte est reduite a zero
+	 *@param position
+	 */
 
 	public void attaquer(Coordonnee position) {
 		int x = position.getX();
@@ -97,6 +187,11 @@ public abstract class Insecte {
 			insecte.mourir();
 		}
 	}
+	
+	/**
+	 * fait mourir l'insecte en question en l'effaçant de la grille apres avoir recupere sa position
+	 * et affiche un message de deces
+	 */
 
 	public void mourir() {
 		int x = this.getPosition().getX();
@@ -105,6 +200,14 @@ public abstract class Insecte {
 		Simulation.getCasesGr().setMessage(this.toString() + " est decedee.");
 
 	}
+	
+	/**
+	 * deplace l'insecte c'est-a-dire change sa coordonnee
+	 * cette fonction fait d'abord la liste des positions possibles pour la fourmi
+	 * @param c
+	 * @return position
+	 */
+
 
 	public Coordonnee allerA(Coordonnee c) {
 		int insecteX = this.position.getX();
@@ -130,6 +233,16 @@ public abstract class Insecte {
 		}
 		return this.position;
 	}
+	
+	/**
+	 * Cette fonction retourne une liste de toutes les positions possibles ou l'insecte opurra se deplacer,
+	 * c'est-a-dire la liste des cases vacantes autour de de lui
+	 * @return position
+	 */
+	
+	
+	
+	
 	public ArrayList<Coordonnee> caseVacantes(){
 		int insecteX = this.position.getX();
 		int insecteY = this.position.getY();
@@ -148,6 +261,14 @@ public abstract class Insecte {
 		}
 		return listPosition;
 	}
+	
+	/**
+	 * deplace l'insecte c'est-a-dire change sa coordonnee
+	 * Cette fonction choisit aleatoirement la nouvelle position de l'insecte parmi la liste des positions possibles 
+	 * 
+	 * @param position
+	 */
+	
 	public Coordonnee allerAleatoire() {
 		
 		ArrayList<Coordonnee> listPosition = this.caseVacantes();

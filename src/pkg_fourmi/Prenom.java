@@ -1,5 +1,10 @@
 package pkg_fourmi;
 
+/**
+ * Enumeration contenant les prenoms possibles pour les insectes que l'on tirera aléatoirement lors de leur
+ * apparition
+ */
+
 public enum Prenom {
 	
 	Emma,

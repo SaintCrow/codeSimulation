@@ -1,5 +1,11 @@
 package pkg_fourmi;
 
+
+/**
+ * Enumeration contenant les noms possibles pour les insectes que l'on tirera aléatoirement lors de leur
+ * apparition
+ */
+
 public enum Nom {
 	MARTIN,
 	BERNARD,

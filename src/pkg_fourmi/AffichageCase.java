@@ -31,7 +31,7 @@ public class AffichageCase extends JPanel {
 	private ArrayList<int[]> positionTransporteuse = new ArrayList<int[]>();
 	private Font f;
 	private ArrayList<int[]> positionSoldate = new ArrayList<int[]>();
-	private static String message = " ";
+	private static String message[] = {" "," "," "};
 	/**
 	 * fonction definissant la taille de la grille et la couleur du fond
 	 */
@@ -57,9 +57,15 @@ public class AffichageCase extends JPanel {
 		s = new String("Nombre de d'ennemis :" + Simulation.getListEnnemi().size());
 		textlayout = new TextLayout(s, f, frc);
 		textlayout.draw(dessin, 15, 81);
-		s = message;
+		s = message[2];
 		textlayout = new TextLayout(s, f, frc);
-		textlayout.draw(dessin, 15, 950);
+		textlayout.draw(dessin, 15, 980);
+		s = message[1];
+		textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 15, 960);
+		s = message[0];
+		textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 15, 940);
 	}
 
 	/**
@@ -226,12 +232,14 @@ public class AffichageCase extends JPanel {
 		fenetre.setVisible(true);
 	}
 
-	public String getMessage() {
+	public String[] getMessage() {
 		return message;
 	}
 
 	public void setMessage(String message) {
-		this.message = message;
+		this.message[0] = this.message[1];
+		this.message[1] = this.message[2];		
+		this.message[2] = message;
 	}
 
 }

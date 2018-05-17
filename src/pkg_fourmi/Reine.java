@@ -66,21 +66,21 @@ public class Reine extends Fourmi{
 				Fourmi fourmi = new Soldate(position, this.getColonie());
 				this.getColonie().ajouterFourmi(fourmi);
 				this.getColonie().setStockNourriture(stockNourriture-5);
-				System.out.println(fourmi.toString() + " est n�(e).");
+				System.out.println(fourmi.toString() + " est ne(e).");
 			}
 			
 			else if (choixPonte == 1) {
 				Fourmi fourmi = new Eclaireuse(position, this.getColonie());
 				this.getColonie().ajouterFourmi(fourmi);
 				this.getColonie().setStockNourriture(stockNourriture-2);
-				System.out.println(fourmi.toString() + " est n�(e).");
+				System.out.println(fourmi.toString() + " est ne(e).");
 			}
 			
 			else {
 				Fourmi fourmi = new Transporteuse(position, this.getColonie());
 				this.getColonie().ajouterFourmi(fourmi);
 				this.getColonie().setStockNourriture(stockNourriture-2);
-				System.out.println(fourmi.toString() + " est n�(e).");
+				System.out.println(fourmi.toString() + " est ne(e).");
 			}
 			
 		}

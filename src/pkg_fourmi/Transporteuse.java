@@ -24,14 +24,14 @@ public class Transporteuse extends Eclaireuse {
 		Simulation.getGrille()[x][y].addNourriture(-nourritureRecup);
 		this.nourriture = nourritureRecup;
 		this.setRetour(true);
-		Simulation.getCasesGr().setMessage(this.toString() + " a r�cup�r� de la nourriture.");
+		Simulation.getCasesGr().setMessage(this.toString() + " a recupere de la nourriture.");
 	}
 
 	public void deposerNourriture() {
 		this.getColonie().setStockNourriture(this.getColonie().getStockNourriture() + this.nourriture);
 		this.nourriture = 0;
 		this.setRetour(false);
-		Simulation.getCasesGr().setMessage(this.toString() + " a rapport� de la nourriture � la fourmili�re.");
+		Simulation.getCasesGr().setMessage(this.toString() + " a rapporte de la nourriture a la fourmiliere.");
 	}
 
 	public Coordonnee suivrePheromone() {

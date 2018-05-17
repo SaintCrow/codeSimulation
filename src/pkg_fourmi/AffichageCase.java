@@ -31,7 +31,7 @@ public class AffichageCase extends JPanel {
 	private ArrayList<int[]> positionTransporteuse = new ArrayList<int[]>();
 	private Font f;
 	private ArrayList<int[]> positionSoldate = new ArrayList<int[]>();
-	private String message = "";
+	private static String message = " ";
 	/**
 	 * fonction definissant la taille de la grille et la couleur du fond
 	 */
@@ -57,6 +57,9 @@ public class AffichageCase extends JPanel {
 		s = new String("Nombre de d'ennemis :" + Simulation.getListEnnemi().size());
 		textlayout = new TextLayout(s, f, frc);
 		textlayout.draw(dessin, 15, 81);
+		s = message;
+		textlayout = new TextLayout(s, f, frc);
+		textlayout.draw(dessin, 15, 950);
 	}
 
 	/**

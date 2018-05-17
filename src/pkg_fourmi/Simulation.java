@@ -16,6 +16,10 @@ public class Simulation {
 	private static int nbr_tour = 1;
 	private static boolean continuer = true;
 	private static List<Ennemi> listEnnemi = new ArrayList<Ennemi>();
+	//Initialisation de l'affichage :
+	private static JFrame fenetre = new JFrame();
+	private static AffichageCase casesGr = new AffichageCase();
+			
 	
 	
 
@@ -108,6 +112,10 @@ public class Simulation {
 		hauteur = 100;
 		largeur = 100;
 		grille = new Case[largeur][hauteur];
+		fenetre.add(getCasesGr());
+		fenetre.setSize(10*largeur, 10*hauteur);
+		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fenetre.setVisible(true);
 		Coordonnee centre = new Coordonnee(((int)largeur/2),((int)hauteur/2));
 		
 		//Creation de la carte :
@@ -238,13 +246,7 @@ public class Simulation {
 		//Initialisation de la carte :
 		initialisation(0, 0, 0, nourMap, nourColonie);
 
-		//Initialisation de l'affichage :
-		JFrame fenetre = new JFrame();
-		AffichageCase cases = new AffichageCase();
-		fenetre.add(cases);
-		fenetre.setSize(10*largeur, 10*hauteur);
-		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		fenetre.setVisible(true);
+		
 		
 		//Debut de la simulation :
 		
@@ -270,19 +272,37 @@ public class Simulation {
 			
 			
 			Simulation.tourPlusPlus();
+			for (Ennemi ennemi : listEnnemi) {
+							ennemi.action();
+							}
+							for (Fourmi fourmi : colonie.getMembres()) {
+								fourmi.action();
+							}
 			
 			while (System.currentTimeMillis() - time < 100){
 				
 			}
 			time = System.currentTimeMillis();
 			
-			cases.setGrille(grille);
-			cases.repaint();
+			casesGr.setGrille(grille);
+			casesGr.repaint();
 			
 		}
 		
 
 
+	}
+
+
+
+	public static AffichageCase getCasesGr() {
+		return casesGr;
+	}
+
+
+
+	public static void setCasesGr(AffichageCase casesGr) {
+		Simulation.casesGr = casesGr;
 	}
 
 }

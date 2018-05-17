@@ -2,17 +2,12 @@ package pkg_fourmi;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;

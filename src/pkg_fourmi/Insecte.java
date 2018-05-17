@@ -202,7 +202,7 @@ public abstract class Insecte {
 	}
 	
 	/**
-	 * deplace l'insecte c'est-a-dire change sa coordonnee
+	 * Renvoie la position a proximite immediate de la fourmi sur le chemin entre elle et la position c
 	 * cette fonction fait d'abord la liste des positions possibles pour la fourmi
 	 * @param c
 	 * @return position
@@ -210,6 +210,7 @@ public abstract class Insecte {
 
 
 	public Coordonnee allerA(Coordonnee c) {
+		Random rd = new Random();
 		int insecteX = this.position.getX();
 		int insecteY = this.position.getY();
 		ArrayList<Coordonnee> posiPossible = new ArrayList<Coordonnee>();
@@ -225,13 +226,21 @@ public abstract class Insecte {
 		if (insecteY > c.getY()) {
 			posiPossible.add(new Coordonnee(insecteX, insecteY - 1));
 		}
+		
+		ArrayList<Coordonnee> listPosi = new ArrayList<Coordonnee>();
+		
 		for (Coordonnee position : posiPossible) {
 			if ((position.estCorrecte())
 					&& (Simulation.getGrille()[position.getX()][position.getY()].getInsecte() == null)) {
-				return position;
+				listPosi.add(position);
 			}
 		}
-		return this.position;
+		if (listPosi.size() == 0) {
+			return this.position;
+		}
+		else {
+			return listPosi.get(rd.nextInt(listPosi.size()));
+		}
 	}
 	
 	/**

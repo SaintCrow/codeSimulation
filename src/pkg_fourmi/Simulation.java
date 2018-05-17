@@ -242,17 +242,10 @@ public class Simulation {
 
 	public static void main(String[] args) {
 		
-		//Saisi des parametres de la simulation :
-		Scanner scan = new Scanner(System.in);
 		
-		System.out.println("Nombre de points de nourriture ?");
-		int nourMap = 100;
-		System.out.println("Quantite de nourriture de la colonie ?");
-		int nourColonie =100;
-		scan.close();
 		
 		//Initialisation de la carte :
-		initialisation(0, 0, 0, nourMap, nourColonie);
+		initialisation(0, 0, 0, 20, 100);
 
 		
 		

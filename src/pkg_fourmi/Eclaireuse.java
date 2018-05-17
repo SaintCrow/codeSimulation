@@ -6,12 +6,30 @@ public class Eclaireuse extends Fourmi {
 
 	private boolean retour;
 	private ArrayList<Coordonnee> chemin;
+	
+
+	/**
+	 * constructeur
+	 * 
+	 * On prend en paramètre la position de l'éclaireuse et la colonie à laquelle elle appartient
+	 * 
+	 * @param position
+	 * @param colonie
+	 */
 
 	public Eclaireuse(Coordonnee position, Colonie colonie) {
 		super(position, 1, 1, colonie);
 		this.retour = false;
 		this.chemin = new ArrayList<Coordonnee>();
 	}
+	
+	/**
+	 * Cette fonction permet a l'eclaireuse de se deplacer, c'est-a-dire qu'elle change les coordonnees et donc la position 
+	 * de cette fourmi
+	 * si la fourmi n'est pas en retour, on ajoute ses coordonnees au chemin
+	 *
+	 */
+
 
 	@Override
 	public void deplacement(Coordonnee c) {
@@ -24,22 +42,63 @@ public class Eclaireuse extends Fourmi {
 			}
 		}
 	}
+	
+	/**
+	 * Cette fonction renvoie un booléen pour déterminer si la fourmi retourne vers la colonie ou est en recherche
+	 * 
+	 * @return retour 
+	 */
+
 
 	public boolean getRetour() {
 		return retour;
 	}
+	
+
+	/**
+	 *set 
+	 * 
+	 * @param retour (le booléen défini dans la foonction getRetour)  
+	 */
+
 
 	public void setRetour(boolean retour) {
 		this.retour = retour;
 	}
+	
+	/**
+	 *getter
+	 *
+	 *Le chemin est une liste de coordonnées qui contient le chemin parcouru par la fourmi pendant qu'elle était en recherche
+	 * (pas en état de retour) afin qu'elle puisse retrouver son chemin lorsqu'elle retourne à la colonie
+	 * 
+	 * @return chemin
+	 */
 
 	public ArrayList<Coordonnee> getChemin() {
 		return chemin;
 	}
+	
+
+	/**
+	 * set chemin
+	 * 
+	 * @param chemin 
+	 */
 
 	public void setChemin(ArrayList<Coordonnee> chemin) {
 		this.chemin = chemin;
 	}
+	
+	/**
+	 *Cette fonction code les actions successives de l'éclaireuse:
+	 *la recherche d'ennemis puis la pose de pheromones de danger,
+	 *l'attaque des ennemis eventuels,
+	 *le fait de suivre le chemin dans le sens inverse si elle est en retour en posant des pgeromones de nourriture,
+	 *le fait de se mettre en retour si elle trouve de la nourriture,
+	 *et enfin le fait de se deplacer aleatoirement sinon
+	 * 
+	 */
 
 	public void action() {
 
@@ -117,6 +176,14 @@ public class Eclaireuse extends Fourmi {
 		}
 
 	}
+	
+
+	/**
+	 * Cette fonction permet à l'éclaireuse de poser une phéromone de nourriture
+	 * La phéromone est posée aux coordonnées de la fourmi et est ajoutée à la grille
+	 * Les pheromones sont posees tant que la fourmi est en retour
+	 * 
+	 */
 
 	public void poserPheromoneNourriture() {
 		Coordonnee coordFourmi = this.getPosition();
@@ -124,6 +191,19 @@ public class Eclaireuse extends Fourmi {
 		int y = coordFourmi.getY();
 		Simulation.getGrille()[x][y].addPheroNourriture(40);
 	}
+	
+	/**
+	 * Cette fonction permet à la fourmi de rechercher et de détecter la nourriture
+	 * dans le champ de vision de la fourmi
+	 * Si plusieurs sources de nourriture sont en vue, la fourmi prend en compte la
+	 * plus proche
+	 * 
+	 * 
+	 * @return null si la fonction ne détecte pas de nourriture
+	 * @return listNourriture.get(0) si une seule source de nourriture est détectée,
+	 * la fonction renvoie donc les coordonnées de cette source de nourriture
+	 * @return coordPlusProche si plusieurs sources sont détectées, on mesure
+	 */
 
 	public Coordonnee rechercheNourriture() {
 		Coordonnee coordFourmi = this.getPosition();
@@ -153,6 +233,14 @@ public class Eclaireuse extends Fourmi {
 		}
 
 	}
+	
+
+	/**
+	 * Cette fonction fait la liste des nouvelles positions possibles pour l'eclaireuse et en choisit une aleatoirement
+	 * parmi elles
+	 * On a egalement ajoute une fonctionnalite pour empecher la fourmi de parcourir une nouvelle fois les cases deja stockees
+	 * dans le chemin (liste des cases deja parcourues par la fourmi depuis la fourmiliere)
+	 */
 
 	@Override
 	public Coordonnee allerAleatoire() {
@@ -192,6 +280,13 @@ public class Eclaireuse extends Fourmi {
 			return this.getPosition();
 		}
 	}
+	
+
+	/**
+	 * Cette fonction toString nous permet de récupérer facilement le nom et le prénom de l'éclaireuse 
+	 * 
+	 * @return s 
+	 */
 
 	@Override
 	public String toString() {

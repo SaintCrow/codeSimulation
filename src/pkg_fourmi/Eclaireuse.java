@@ -129,28 +129,11 @@ public class Eclaireuse extends Fourmi {
 				this.deplacement(position);
 			} else {
 				this.poserPheromoneNourriture();
-				boolean plusProche = false;
-				for (Coordonnee c : this.caseVacantes()) {// "lisse" le chemin
-															// pour eviter les
-															// boucles
-					if (this.getChemin().contains(c)
-							|| Simulation.getGrille()[c.getX()][c.getY()].getType() == TypeCase.Fourmiliere) {
-						int newLast = this.getChemin().indexOf(c);
-						int l = this.getChemin().size();
-						plusProche = true;
-						for (int i = l-1 ; i > newLast+1; i--) {
-							this.getChemin().remove(i);
-						}
-						this.deplacement(c);
-						System.out.println("corrige");
-						break;
-
-					}
-				}
-				if (!(plusProche)) {
-					this.deplacement(this.getChemin().get(this.getChemin().size() - 1));
-					this.getChemin().remove(this.getChemin().size() - 1);
-				}
+				//System.out.print(this.getChemin().size());
+				this.setChemin(this.lisserChemin());
+				//System.out.println(" -> "+this.getChemin().size());
+				this.deplacement(this.getChemin().get(this.getChemin().size()-1));
+				this.getChemin().remove(this.getChemin().size()-1);
 			}
 		}
 
@@ -241,6 +224,26 @@ public class Eclaireuse extends Fourmi {
 	 * On a egalement ajoute une fonctionnalite pour empecher la fourmi de parcourir une nouvelle fois les cases deja stockees
 	 * dans le chemin (liste des cases deja parcourues par la fourmi depuis la fourmiliere)
 	 */
+	
+	public ArrayList<Coordonnee> lisserChemin() {
+		ArrayList<Coordonnee> nChemin = new ArrayList<Coordonnee>();
+		int l = this.getChemin().size();
+		for (int i = 0; i < l; i++){
+			Coordonnee position1 = this.getChemin().get(i);
+			for (int j = l-1; j >=0; j--){
+				Coordonnee position2 = this.getChemin().get(j);
+				if (position1.getX() == position2.getX() && position1.getY() == position2.getY() && i != j){
+					for (int k = 0; k < l; k++){
+						if (k <= i || k > j){
+							nChemin.add(this.getChemin().get(k));
+						}
+					}
+					return nChemin;
+				}
+			}
+		}
+		return this.getChemin();
+	}
 
 	@Override
 	public Coordonnee allerAleatoire() {

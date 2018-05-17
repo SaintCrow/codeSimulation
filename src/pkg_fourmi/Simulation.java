@@ -112,9 +112,9 @@ public class Simulation {
 	 * @param nourColonie 
 	 */
 
-	public static void initialisation(int nbTravailleuse, int nbEclaireuse, int nbSoldate, int haut, int larg, int nourMap, int nourColonie){
-		hauteur = haut;
-		largeur = larg;
+	public static void initialisation(int nbTravailleuse, int nbEclaireuse, int nbSoldate, int nourMap, int nourColonie){
+		hauteur = 100;
+		largeur = 100;
 		grille = new Case[largeur][hauteur];
 		Coordonnee centre = new Coordonnee(((int)largeur/2),((int)hauteur/2));
 		
@@ -151,9 +151,6 @@ public class Simulation {
 		
 		Fourmi reine = new Reine(centre, colonie);
 		colonie.ajouterFourmi(reine);
-		
-		Ennemi ennemi1 = new Ennemi(new Coordonnee(0,0)) ;
-		ajouterEnnemi(ennemi1);
 		
 	}
 	
@@ -239,10 +236,7 @@ public class Simulation {
 		
 		//Saisi des parametres de la simulation :
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Hauteur de la carte ?");
-		int haut = 100;
-		System.out.println("Largeur de la carte ?");
-		int larg = 100;
+		
 		System.out.println("Nombre de points de nourriture ?");
 		int nourMap = 100;
 		System.out.println("Quantite de nourriture de la colonie ?");
@@ -250,7 +244,7 @@ public class Simulation {
 		scan.close();
 		
 		//Initialisation de la carte :
-		initialisation(0, 0, 0, haut, larg, nourMap, nourColonie);
+		initialisation(0, 0, 0, nourMap, nourColonie);
 
 		//Initialisation de l'affichage :
 		JFrame fenetre = new JFrame();
@@ -270,13 +264,6 @@ public class Simulation {
 		while (isContinuer()) {
 			if(!(colonie.getMembres().size()>0 && colonie.getMembres().get(0) instanceof Reine)){
 				setContinuer(false);
-			}
-			System.out.println("Tour : "+Simulation.getTour());
-			for (Ennemi ennemi : listEnnemi) {
-				ennemi.action();
-			}
-			for (Fourmi fourmi : colonie.getMembres()) {
-				fourmi.action();
 			}
 			
 			if (nbr_tour % 5 == 0){
